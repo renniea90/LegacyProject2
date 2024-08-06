@@ -59,7 +59,8 @@ public class ItemService {
     public ResponseEntity<?> ItemUpdate(Integer id,
                                             String name,
                                             double price,
-                                            Integer quantity){
+                                            Integer quantity,
+                                        String imageUrl){
 
         Optional<Item> found = this.repo.findById(Math.toIntExact(id));
         if (found.isEmpty()) {
@@ -72,6 +73,7 @@ public class ItemService {
         if (name != null) toUpdate.setName(name);
         if (price != 0) toUpdate.setPrice(price);
         if (quantity != null) toUpdate.setQuantity(quantity);
+        if (imageUrl != null) toUpdate.setImageUrl(imageUrl);
 
         Item updated = this.repo.save(toUpdate);
         return ResponseEntity.ok(new ItemDto(updated));

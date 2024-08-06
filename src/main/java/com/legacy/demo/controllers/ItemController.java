@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3036")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class ItemController {
 
@@ -34,6 +34,6 @@ public class ItemController {
     @PatchMapping("item/update/{id}")
     public ResponseEntity<?> updateItem(@PathVariable Integer id,
                                         @RequestBody Item ItemUpdate){
-        return this.service.ItemUpdate(id, ItemUpdate.getName(), ItemUpdate.getPrice(), ItemUpdate.getQuantity());
+        return this.service.ItemUpdate(id, ItemUpdate.getName(), ItemUpdate.getPrice(), ItemUpdate.getQuantity(), ItemUpdate.getImageUrl());
     }
 }

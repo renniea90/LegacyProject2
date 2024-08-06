@@ -10,13 +10,15 @@ public class ItemDto {
     private String name;
     private Double price;
     private Integer quantity;
+    private String imageUrl;
 
-    public ItemDto(Integer id, String name, Double price, Integer quantity) {
+    public ItemDto(Integer id, String name, Double price, Integer quantity, String imageUrl) {
         super();
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+        this.imageUrl  =  imageUrl ;
     }
     public ItemDto() {
         super();
@@ -28,6 +30,7 @@ public class ItemDto {
         this.name = item.getName();
         this.price = item.getPrice();
         this.quantity = item.getQuantity();
+        this.imageUrl = item.getImageUrl();
     }
 
     public Integer getId() {
@@ -60,5 +63,13 @@ public class ItemDto {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

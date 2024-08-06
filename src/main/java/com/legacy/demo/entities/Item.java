@@ -5,26 +5,30 @@ import jakarta.persistence.*;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer id;
     private String name;
     private Double price;
     private Integer quantity;
+    private String imageUrl;
 
     public Item(){
     }
 
-    public Item(Integer id, String name, Double price, Integer quantity) {
+    public Item(Integer id, String name, Double price, Integer quantity, String imageUrl) {
         super();
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+        this.imageUrl = imageUrl;
     }
 
-    public Item(String name, Double price) {
+    public Item(String name, Double price, String imageUrl) {
         super();
         this.name = name;
         this.price = price;
+        this.imageUrl = imageUrl;
     }
 
     public Item(Integer id) {
@@ -62,5 +66,13 @@ public class Item {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
