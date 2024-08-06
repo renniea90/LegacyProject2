@@ -1,0 +1,172 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.card {
+  padding-bottom: 5px;
+  width: 29.333%;
+  margin: 2%;
+  text-align: center;
+  float: left;
+  box-shadow: 0 8px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-image{
+
+ 
+  margin: 20px 0 20px 0;
+
+}
+
+.title-banner {
+  background-color: darkolivegreen;
+  text-align: center;
+  height: 80px;
+  line-height: 80px;
+}
+
+.site-title {
+  color: white;
+  margin: 0;
+}
+
+nav ul {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 1rem;
+
+  margin: 0;
+
+  padding: 0.5rem 0;
+
+  list-style: none;
+
+  border-bottom: 1px lightgrey solid;
+
+  box-shadow: 0 0px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+nav li a {
+  text-decoration: none;
+  color: darkolivegreen;
+}
+
+.body {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 20px;
+  height: 600px;
+  
+}
+
+.homeImage {
+  float: right;
+  width: 40%;
+  max-width: 400px;
+  border-radius: 10px;
+}
+
+.featurePanel {
+  float: left;
+  width: 60%;
+}
+
+.homeTitle {
+  color: darkolivegreen;
+  font-size: 4em;
+  text-align: left;
+  
+}
+
+.featureText{
+  color: darkolivegreen;
+  font-size: 2em;
+  text-align: left;
+  
+}
+
+.bannerButton {
+  width: 100%;
+  background-color: darkolivegreen;
+  color: white;
+  font-size: 2em;
+  border-radius: 10px;
+  border-color: transparent;
+}
+
+.bannerButton a {
+  color: white;
+  text-decoration: none;
+  width: 100%;
+  float: left;
+
+}
+
+.shopHeader {
+  color: darkolivegreen;
+}
+
+.cartButton{
+  width: 50%;
+  background-color: darkolivegreen;
+  color: white;
+  border-radius: 5px;
+  border-color: transparent;
+}
+
+.inCartButton{
+  width: 50%;
+  background-color: lightgrey;
+  color: darkolivegreen;
+  border-radius: 5px;
+  border-color: transparent;
+}
+
+.shopItems {
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 100%;
+}
