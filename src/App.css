@@ -54,7 +54,7 @@
 }
 
 .title-banner {
-  background-color: darkolivegreen;
+  background-color: goldenrod;
   text-align: center;
   height: 80px;
   line-height: 80px;
@@ -88,7 +88,7 @@ nav ul {
 
 nav li a {
   text-decoration: none;
-  color: darkolivegreen;
+  color: black;
 }
 
 .body {
@@ -112,14 +112,14 @@ nav li a {
 }
 
 .homeTitle {
-  color: darkolivegreen;
+  color: goldenrod;
   font-size: 4em;
   text-align: left;
   
 }
 
 .featureText{
-  color: darkolivegreen;
+  color: black;
   font-size: 2em;
   text-align: left;
   
@@ -127,7 +127,7 @@ nav li a {
 
 .bannerButton {
   width: 100%;
-  background-color: darkolivegreen;
+  background-color: goldenrod;
   color: white;
   font-size: 2em;
   border-radius: 10px;

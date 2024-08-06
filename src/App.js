@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <div className="title-banner">
-        <h1 className='site-title'>seed theory</h1>
+        <h1 className='site-title'>Sahara Stationery</h1>
       </div>
       <BrowserRouter>
         <Navbar />
