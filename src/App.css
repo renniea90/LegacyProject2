@@ -148,7 +148,7 @@ nav li a {
 }
 
 .cartButton{
-  margin-top: 7%;
+
   width: 50%;
   background-color: goldenrod;
   color: white;
@@ -157,7 +157,7 @@ nav li a {
 }
 
 .inCartButton{
-  margin-top: 7%;
+
   width: 50%;
   background-color: lightgrey;
   color: golden;
@@ -174,3 +174,8 @@ nav li a {
   width: 100%;
 }
 
+.outOfStock {
+  color: red;
+  margin: 0px; 
+  padding-bottom: 10px; 
+}
