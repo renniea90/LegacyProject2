@@ -52,6 +52,7 @@ function ItemCard({ id, name, price, imageUrl, quantity }) {
             className="quantityInput"
           />
           <br/>
+         
           {buttonStatus === "Not in Cart" ? (
             <button onClick={handleAddToCart} className="cartButton">
               🛒 Add to Cart

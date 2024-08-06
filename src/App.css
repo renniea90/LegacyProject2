@@ -39,8 +39,9 @@
 
 .card {
   padding-bottom: 5px;
+  border-radius: 8px; 
   width: 29.333%;
-  height: 350px;
+  height: 400px;
   margin: 2%;
   text-align: center;
   float: left;
@@ -149,7 +150,8 @@ nav li a {
 
 .cartButton{
 
-  margin-top: 35px;
+  padding: 10px 20px;
+  margin-top: 5px;
   width: 50%;
   background-color: goldenrod;
   color: white;
@@ -159,7 +161,8 @@ nav li a {
 
 .inCartButton{
 
-  margin-top: 35px;
+  padding: 10px 20px;
+  margin-top: 5px;
   width: 50%;
   background-color: lightgrey;
   color: golden;
@@ -181,4 +184,35 @@ nav li a {
   color: red;
   margin: 0px; 
   padding-bottom: 10px; 
+}
+
+.quantityContainer {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  gap: 8px; /* Space between label and input field */
+  margin-top: 16px; /* Space above the quantity container */
+}
+
+.quantityLabel {
+  font-weight: bold; /* Make the label bold */
+}
+
+/* Input field styling */
+.quantityInput {
+  width: 60px; /* Fixed width */
+  padding: 8px; /* Space inside the input field */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 16px; /* Larger text for readability */
+  text-align: center; /* Center text inside the input */
+  outline: none; /* Remove default focus outline */
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+}
+
+/* Input field focus styling */
+.quantityInput:focus {
+  border-color: #007bff; /* Blue border on focus */
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Blue glow on focus */
 }
