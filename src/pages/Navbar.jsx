@@ -11,7 +11,7 @@ export default function Navbar() {
                     <Link to="/shop">Shop</Link>
                 </li>
                 <li className='nav-item'>
-                    <Link to="/about">About</Link>
+                    <Link to="/cart">Cart</Link>
                 </li>
             </ul>
         </nav>
