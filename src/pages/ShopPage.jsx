@@ -25,7 +25,8 @@ const ShopPage = () => {
                         id={item.id}
                         name={item.name}
                         price={item.price}
-                        imageUrl={`http://example.com/images/${item.id}.jpg`} 
+                        imageUrl={item.imageUrl} 
+                        quantity={item.quantity}
                     />
                 ))}
             </div>
