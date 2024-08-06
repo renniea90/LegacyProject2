@@ -143,12 +143,12 @@ nav li a {
 }
 
 .shopHeader {
-  color: darkolivegreen;
+  color: goldenrod;
 }
 
 .cartButton{
   width: 50%;
-  background-color: darkolivegreen;
+  background-color: goldenrod;
   color: white;
   border-radius: 5px;
   border-color: transparent;
@@ -157,7 +157,7 @@ nav li a {
 .inCartButton{
   width: 50%;
   background-color: lightgrey;
-  color: darkolivegreen;
+  color: golden;
   border-radius: 5px;
   border-color: transparent;
 }
