@@ -41,11 +41,3 @@ function PlantCard({id, name, price, imageUrl}) {
 };
 
 export default PlantCard;
-
-// {itemsData.map((item) => (
-//     <div key={item.id}>
-//       <h1>{item.name}</h1>
-//       <h3>£{item.price.toFixed(2)}</h3>
-//       <img className="card-image" src={item.imageUrl} />
-//     </div>
-//   ))}
