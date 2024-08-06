@@ -1,5 +1,5 @@
 import itemsData from "../itemsData.json";
-import PlantCard from '../components/PlantCard';
+import ItemCard from '../components/ItemCard';
 import { useEffect, useState } from "react";
 
 
@@ -19,10 +19,10 @@ const ShopPage = () => {
 
     return(
         <div className="body">
-            <h1 className="shopHeader">Our Plants</h1>
+            <h1 className="shopHeader">Our Stationery</h1>
             <div className="shopItems">
                 {items.map((item) => (
-                        <PlantCard
+                        <ItemCard
                         id = {item.id}
                         name = {item.name}
                         price = {item.price}

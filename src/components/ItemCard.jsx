@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
-import ChangeButton from "../components/CartButton";
+import ChangeButton from "./CartButton";
 import { CartContext } from "./CartProvider";
 
-function PlantCard({id, name, price, imageUrl}) {
+function ItemCard({id, name, price, imageUrl}) {
 
   const {addToCart} = useContext(CartContext)
   const [buttonStatus, setButtonStatus] = useState("Not in Cart");
@@ -40,4 +40,4 @@ function PlantCard({id, name, price, imageUrl}) {
   );
 };
 
-export default PlantCard;
+export default ItemCard;
