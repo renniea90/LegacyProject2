@@ -11,7 +11,7 @@ function ItemCard({ id, name, price, imageUrl, quantity }) {
       addToCart(id, inputQuantity); 
       setButtonStatus("In Cart");
     } else {
-      alert("Please enter a valid quantity");
+      alert("Please enter a valid quantity.");
     }
   }
 
@@ -20,11 +20,17 @@ function ItemCard({ id, name, price, imageUrl, quantity }) {
   }
 
   function handleQuantityChange(event) {
-    const value = parseInt(event.target.value, 10);
-    if (!isNaN(value) && value >= 1 && value <= quantity) {
-      setInputQuantity(value);
-    } else {
-      setInputQuantity(1); // Reset to 1 if the value is invalid
+    const value = event.target.value;
+    const numberValue = parseInt(value, 10);
+
+  
+    if (value === '') {
+      setInputQuantity('');
+    } else if (!isNaN(numberValue) && numberValue >= 1 && numberValue <= quantity) {
+      setInputQuantity(numberValue);
+    } else if (numberValue > quantity) {  
+      setInputQuantity(quantity);
+      alert(`You can only select up to ${quantity} items.`);
     }
   }
 
@@ -45,6 +51,7 @@ function ItemCard({ id, name, price, imageUrl, quantity }) {
             onChange={handleQuantityChange}
             className="quantityInput"
           />
+          <br/>
           {buttonStatus === "Not in Cart" ? (
             <button onClick={handleAddToCart} className="cartButton">
               🛒 Add to Cart
@@ -63,4 +70,3 @@ function ItemCard({ id, name, price, imageUrl, quantity }) {
 }
 
 export default ItemCard;
-
