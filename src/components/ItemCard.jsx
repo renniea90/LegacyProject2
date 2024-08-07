@@ -1,17 +1,21 @@
 import { useContext, useState } from "react";
 import { CartContext } from "./CartProvider";
+import CustomAlert from "./CustomAlert";
 
 function ItemCard({ id, name, price, imageUrl, quantity }) {
   const { addToCart } = useContext(CartContext);
   const [buttonStatus, setButtonStatus] = useState("Not in Cart");
-  const [inputQuantity, setInputQuantity] = useState(1); 
+  const [inputQuantity, setInputQuantity] = useState(1);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
 
   function handleAddToCart() {
     if (inputQuantity > 0 && inputQuantity <= quantity) {
-      addToCart(id, inputQuantity); 
+      addToCart(id, inputQuantity);
       setButtonStatus("In Cart");
     } else {
-      alert("Please enter a valid quantity.");
+      setAlertMessage("Please enter a valid quantity.");
+      setShowAlert(true);
     }
   }
 
@@ -23,14 +27,15 @@ function ItemCard({ id, name, price, imageUrl, quantity }) {
     const value = event.target.value;
     const numberValue = parseInt(value, 10);
 
-  
     if (value === '') {
       setInputQuantity('');
     } else if (!isNaN(numberValue) && numberValue >= 1 && numberValue <= quantity) {
       setInputQuantity(numberValue);
-    } else if (numberValue > quantity) {  
+      setShowAlert(false); 
+    } else if (numberValue > quantity) {
       setInputQuantity(quantity);
-      alert(`You can only select up to ${quantity} items.`);
+      setAlertMessage(`You can only select up to ${quantity} items.`);
+      setShowAlert(true);
     }
   }
 
@@ -39,7 +44,7 @@ function ItemCard({ id, name, price, imageUrl, quantity }) {
       <h2>{name}</h2>
       <h3>£{price?.toFixed(2)}</h3>
       <img className="card-image" src={imageUrl} alt={name} height={"50px"} />
-      <br/>
+      <br />
       {quantity > 0 ? (
         <div className="quantityContainer">
           <span className="quantityLabel">Qty:</span>
@@ -51,8 +56,7 @@ function ItemCard({ id, name, price, imageUrl, quantity }) {
             onChange={handleQuantityChange}
             className="quantityInput"
           />
-          <br/>
-         
+          <br />
           {buttonStatus === "Not in Cart" ? (
             <button onClick={handleAddToCart} className="cartButton">
               🛒 Add to Cart
@@ -65,6 +69,12 @@ function ItemCard({ id, name, price, imageUrl, quantity }) {
         </div>
       ) : (
         <h3 className="outOfStock">Out of Stock</h3>
+      )}
+      {showAlert && (
+        <CustomAlert
+          message={alertMessage}
+          onClose={() => setShowAlert(false)}
+        />
       )}
     </div>
   );
