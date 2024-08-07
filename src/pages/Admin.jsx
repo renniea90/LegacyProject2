@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import AddProduct from '../components/AddProduct';
 
 function ConfirmationDialog({ message, onConfirm, onCancel }) {
     return (
@@ -60,18 +61,18 @@ function ProductList({ onProductUpdate }) {
     const [productToUpdate, setProductToUpdate] = useState(null);
     const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'ascending' });
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await axios.get('http://localhost:8081/items/getAll');
-                setProducts(response.data);
-            } catch (error) {
-                console.error('Error fetching products:', error);
-            }
-        };
+    const fetchProducts = async () => {
+        try {
+            const response = await axios.get('http://localhost:8081/items/getAll');
+            setProducts(response.data);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    };
 
+    useEffect(() => {
         fetchProducts();
-    }, [onProductUpdate]);
+    }, []);
 
     const handleDelete = (id) => {
         setProductIdToDelete(id);
@@ -97,7 +98,6 @@ function ProductList({ onProductUpdate }) {
         try {
             const response = await axios.patch(`http://localhost:8081/item/update/${updatedProduct.id}`, updatedProduct);
             if (response.status === 200) {
-                onProductUpdate();
                 setProducts(products.map(product => product.id === updatedProduct.id ? updatedProduct : product));
                 console.log(`Product with ID ${updatedProduct.id} successfully updated.`);
             } else {
@@ -115,7 +115,6 @@ function ProductList({ onProductUpdate }) {
         try {
             const response = await axios.delete(`http://localhost:8081/item/remove/${productIdToDelete}`);
             if (response.status === 200) {
-                onProductUpdate();
                 setProducts(products.filter(product => product.id !== productIdToDelete));
                 console.log(`Product with ID ${productIdToDelete} successfully deleted.`);
             } else {
@@ -150,6 +149,10 @@ function ProductList({ onProductUpdate }) {
     return (
         <div>
             <br /><br />
+            <div className="container2" >
+                <h1 className="pagetitle">Add a New Product</h1>
+                <AddProduct onAddProduct={fetchProducts}/>
+            </div>
             <div className="table-container">
                 <table>
                     <thead>
