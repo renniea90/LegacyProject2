@@ -156,8 +156,8 @@ function ProductList({ onProductUpdate }) {
                         <tr>
                             <th onClick={() => requestSort('id')}>Product ID ↑ ↓</th>
                             <th onClick={() => requestSort('name')}>Product Name ↑ ↓</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
+                            <th onClick={() => requestSort('price')}>Price ↑ ↓</th>
+                            <th onClick={() => requestSort('quantity')}>Quantity ↑ ↓</th>
                             <th>Update Product</th>
                             <th>Delete Product</th>
                         </tr>
