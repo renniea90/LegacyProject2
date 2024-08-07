@@ -82,8 +82,8 @@ const AddProduct = ({ onAddProduct }) => {
         <label className="label1">Price: </label>
         <input
           className="input1"
-          type="number" // Changed to number for better validation
-          step="0.01" // Allows decimal values
+          type="number" 
+          step="0.01" 
           required
           value={price}
           onChange={(e) => setPrice(e.target.value)}
@@ -93,7 +93,7 @@ const AddProduct = ({ onAddProduct }) => {
         <label className="label1">Quantity: </label>
         <input
           className="input1"
-          type="number" // Changed to number for better validation
+          type="number" 
           required
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
@@ -110,8 +110,8 @@ const AddProduct = ({ onAddProduct }) => {
         />
         <br /><br />
 
-        <button className="button1" type="submit">Add Product</button>
-
+        <button className="add-btn" type="submit">Add Product</button>
+        <br /><br />
         {showAlert && (
           <CustomAlert
             message={alertMessage}

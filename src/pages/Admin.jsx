@@ -150,7 +150,7 @@ function ProductList({ onProductUpdate }) {
         <div>
             <br /><br />
             <div className="container2" >
-                <h1 className="pagetitle">Add a New Product</h1>
+                <h2 className="pagetitle">Add a New Product</h2>
                 <AddProduct onAddProduct={fetchProducts}/>
             </div>
             <div className="table-container">
