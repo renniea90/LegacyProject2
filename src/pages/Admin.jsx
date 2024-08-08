@@ -1,32 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import useFetchItems from '../components/FetchItems';
 import AddProduct from '../components/AddProduct';
 import ConfirmationDialogue from '../components/ConfirmationDialogue';
 import UpdateProduct from '../components/UpdateProduct';
 import ProductListTable from '../components/ProductListTable';
 import '../CSS/AdminPage.css'; 
 import '../CSS/Modal.css';
+import axios from 'axios';
 
 const AdminPage = () => {
-    const [products, setProducts] = useState([]);
+    const { items: products, loading, error, refetch } = useFetchItems();
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [productIdToDelete, setProductIdToDelete] = useState(null);
     const [productToUpdate, setProductToUpdate] = useState(null);
     const [showUpdateDialogue, setShowUpdateDialogue] = useState(false);
     const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'ascending' });
-
-    const fetchProducts = async () => {
-        try {
-            const response = await axios.get('http://localhost:8081/items/getAll');
-            setProducts(response.data);
-        } catch (error) {
-            console.error('Error fetching products:', error);
-        }
-    };
-
-    useEffect(() => {
-        fetchProducts();
-    }, []);
 
     const handleDelete = (id) => {
         setProductIdToDelete(id);
@@ -42,8 +30,8 @@ const AdminPage = () => {
         try {
             const response = await axios.delete(`http://localhost:8081/item/remove/${productIdToDelete}`);
             if (response.status === 200) {
-                setProducts(products.filter(product => product.id !== productIdToDelete));
                 console.log(`Product with ID ${productIdToDelete} successfully deleted.`);
+                refetch(); 
             } else {
                 console.error('Failed to delete the product with ID:', productIdToDelete);
             }
@@ -63,10 +51,13 @@ const AdminPage = () => {
         setSortConfig({ key, direction });
     };
 
+    if (loading) return <div>Loading products...</div>;
+    if (error) return <div>Error loading products: {error.message}</div>;
+
     return (
         <div>
             <div className="container2">               
-                <AddProduct onAddProduct={fetchProducts} />
+                <AddProduct onAddProduct={refetch} /> {}
             </div>
             <div className="table-wrapper">
                 <ProductListTable
@@ -91,8 +82,8 @@ const AdminPage = () => {
                 <UpdateProduct
                     product={productToUpdate}
                     onCancel={() => setShowUpdateDialogue(false)}
-                    onUpdateSuccess={(updatedProduct) => {
-                        setProducts(products.map(product => product.id === updatedProduct.id ? updatedProduct : product));
+                    onUpdateSuccess={() => {
+                        refetch(); 
                         setShowUpdateDialogue(false);
                         setProductToUpdate(null);
                     }}

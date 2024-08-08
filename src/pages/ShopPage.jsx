@@ -1,15 +1,17 @@
+import React from 'react';
 import useFetchItems from '../components/FetchItems';
 import ItemList from '../components/ItemList';
 import '../CSS/ShopPage.css';
 
-
 const ShopPage = () => {
-    const apiURL = 'http://localhost:8081/items/getAll';
-    const items = useFetchItems(apiURL);
-   
+    const { items, loading, error } = useFetchItems();
+
+    if (loading) return <div>Loading items...</div>;
+    if (error) return <div>Error loading items: {error.message}</div>;
+
     return (
         <div className="body">
-           <ItemList items={items} />
+            {Array.isArray(items) && <ItemList items={items} />}
         </div>
     );
 };
