@@ -1,10 +1,15 @@
-import customealertcss from '../CSS/CustomAlert.css';
+import customalertcss from '../CSS/CustomAlert.css';
 
 const CustomAlert = ({ message, onClose }) => {
     return (
         <div className="custom-alert">
             <p>{message}</p>
-            <button onClick={onClose}>Close</button>
+            <button
+                onClick={onClose}
+                type ="button"
+                className="custom-alert-button"
+                    >
+                    Close</button>
         </div>
     );
 };

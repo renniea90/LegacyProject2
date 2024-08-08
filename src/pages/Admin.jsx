@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AddProduct from '../components/AddProduct';
+import appcss from '../CSS/App.css';
 
 function ConfirmationDialog({ message, onConfirm, onCancel }) {
     return (
