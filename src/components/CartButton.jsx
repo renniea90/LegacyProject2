@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const ChangeButton = () => {
+const CartButton = () => {
     const [isInCart, setIsInCart] = useState(false);
   
     const handleClick = () => {
@@ -18,4 +18,4 @@ const ChangeButton = () => {
     );
   };
   
-  export default ChangeButton;
+  export default CartButton;
