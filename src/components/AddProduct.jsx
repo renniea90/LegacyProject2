@@ -1,41 +1,22 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import CustomAlert from "./CustomAlert";
+import CustomAlert from './CustomAlert';
 import Modal from 'react-modal';
+import ProductForm from './ProductForm';
 
-Modal.setAppElement('#root'); 
+Modal.setAppElement('#root');
 
 const AddProduct = ({ onAddProduct }) => {
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [quantity, setQuantity] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    price: '',
+    quantity: '',
+    imageUrl: ''
+  });
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [existingProducts, setExistingProducts] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); 
-
- 
-  const handlePriceChange = (e) => {
-    let value = e.target.value;
-    
-
-    if (/^\d*\.?\d{0,2}$/.test(value)) {
-      setPrice(value);
-    }
-  };
-
-  
-
- 
-  const handleQuantityChange = (e) => {
-    let value = e.target.value;
-    
-  
-    if (/^\d*$/.test(value)) {
-      setQuantity(value);
-    }
-  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,20 +36,13 @@ const AddProduct = ({ onAddProduct }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !price || !quantity || !imageUrl) {
+    if (!formData.name || !formData.price || !formData.quantity || !formData.imageUrl) {
       setAlertMessage('All fields are required.');
       setShowAlert(true);
       return;
     }
 
-    const product = {
-      name,
-      price: parseFloat(price).toFixed(2), 
-      quantity: parseInt(quantity, 10),
-      imageUrl
-    };
-
-    const productExists = existingProducts.some(p => p.name === name);
+    const productExists = existingProducts.some(p => p.name === formData.name);
 
     if (productExists) {
       setAlertMessage('Product already exists. Please enter a different product.');
@@ -77,21 +51,23 @@ const AddProduct = ({ onAddProduct }) => {
     }
 
     try {
-      const postResponse = await axios.post('http://localhost:8081/item/add', product);
+      const postResponse = await axios.post('http://localhost:8081/item/add', {
+        ...formData,
+        price: parseFloat(formData.price).toFixed(2),
+        quantity: parseInt(formData.quantity, 10)
+      });
       const data = postResponse.data;
       setAlertMessage(`New Product Added. Your Unique ID is ${data.id}`);
       setShowAlert(true);
-    
-      setName('');
-      setPrice('');
-      setQuantity('');
-      setImageUrl('');
-
+      setFormData({
+        name: '',
+        price: '',
+        quantity: '',
+        imageUrl: ''
+      });
       setExistingProducts([...existingProducts, data]);
       onAddProduct();
-      
-
-      setIsModalOpen(false); 
+      setIsModalOpen(false);
     } catch (error) {
       console.error('Error adding product:', error);
       setAlertMessage('Failed to add product.');
@@ -102,7 +78,6 @@ const AddProduct = ({ onAddProduct }) => {
   return (
     <div>
       <button onClick={() => setIsModalOpen(true)} className="addproduct-btn">Add Product</button>
-
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
@@ -111,58 +86,13 @@ const AddProduct = ({ onAddProduct }) => {
         overlayClassName="modal-overlay"
       >
         <h2>Add Product</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label className="label1">Name: </label>
-            <input
-              className="input1"
-              type="text"
-              required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="label1">Price: </label>
-            <input
-              className="input1"
-              type="text"
-              step="0.01"
-              required
-              value={price}
-              onChange={handlePriceChange}           
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="label1">Quantity: </label>
-            <input
-              className="input1"
-              type="text" 
-              required
-              value={quantity}
-              onChange={handleQuantityChange}
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="label1">Image URL: </label>
-            <input
-              className="input1"
-              type="text"
-              required
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-            />
-          </div>
-          <div className="button-group">
-            <button className="add-btn" type="submit">Submit</button>
-            <button type="button" onClick={() => setIsModalOpen(false)} className="cancel-btn">Cancel</button>
-          </div>
-        </form>
+        <ProductForm
+          formData={formData}
+          onChange={setFormData}
+          onSubmit={handleSubmit}
+          onCancel={() => setIsModalOpen(false)}
+        />
       </Modal>
-
       {showAlert && (
         <CustomAlert
           message={alertMessage}

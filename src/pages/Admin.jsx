@@ -2,18 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AddProduct from '../components/AddProduct';
 import ConfirmationDialogue from '../components/ConfirmationDialogue';
-import UpdateProduct from '../components/UpdateProduct.jsx';
+import UpdateProduct from '../components/UpdateProduct';
 import ProductListTable from '../components/ProductListTable';
 import '../CSS/AdminPage.css'; 
 import '../CSS/Modal.css';
-
 
 const AdminPage = () => {
     const [products, setProducts] = useState([]);
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [productIdToDelete, setProductIdToDelete] = useState(null);
-    const [showUpdateDialogue, setShowUpdateDialogue] = useState(false);
     const [productToUpdate, setProductToUpdate] = useState(null);
+    const [showUpdateDialogue, setShowUpdateDialogue] = useState(false);
     const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'ascending' });
 
     const fetchProducts = async () => {
@@ -37,33 +36,6 @@ const AdminPage = () => {
     const handleCancel = () => {
         setShowConfirmation(false);
         setProductIdToDelete(null);
-    };
-
-    const handleUpdate = (product) => {
-        setProductToUpdate(product);
-        setShowUpdateDialogue(true);
-    };
-
-    const handleUpdateCancel = () => {
-        setShowUpdateDialogue(false);
-        setProductToUpdate(null);
-    };
-
-    const handleUpdateSubmit = async (updatedProduct) => {
-        try {
-            const response = await axios.patch(`http://localhost:8081/item/update/${updatedProduct.id}`, updatedProduct);
-            if (response.status === 200) {
-                setProducts(products.map(product => product.id === updatedProduct.id ? updatedProduct : product));
-                console.log(`Product with ID ${updatedProduct.id} successfully updated.`);
-            } else {
-                console.error('Failed to update the product with ID:', updatedProduct.id);
-            }
-        } catch (error) {
-            console.error('Error during update:', error);
-        } finally {
-            setShowUpdateDialogue(false);
-            setProductToUpdate(null);
-        }
     };
 
     const handleConfirm = async () => {
@@ -94,16 +66,19 @@ const AdminPage = () => {
     return (
         <div>
             <div className="container2">               
-            <AddProduct onAddProduct={fetchProducts} />
+                <AddProduct onAddProduct={fetchProducts} />
             </div>
             <div className="table-wrapper">
-            <ProductListTable
-                products={products}
-                onUpdate={handleUpdate}
-                onDelete={handleDelete}
-                onRequestSort={requestSort}
-                sortConfig={sortConfig}
-            />
+                <ProductListTable
+                    products={products}
+                    onUpdate={(product) => {
+                        setProductToUpdate(product);
+                        setShowUpdateDialogue(true);
+                    }}
+                    onDelete={handleDelete}
+                    onRequestSort={requestSort}
+                    sortConfig={sortConfig}
+                />
             </div>
             {showConfirmation && (
                 <ConfirmationDialogue
@@ -112,11 +87,15 @@ const AdminPage = () => {
                     onCancel={handleCancel}
                 />
             )}
-            {showUpdateDialogue && (
+            {showUpdateDialogue && productToUpdate && (
                 <UpdateProduct
                     product={productToUpdate}
-                    onUpdate={handleUpdateSubmit}
-                    onCancel={handleUpdateCancel}
+                    onCancel={() => setShowUpdateDialogue(false)}
+                    onUpdateSuccess={(updatedProduct) => {
+                        setProducts(products.map(product => product.id === updatedProduct.id ? updatedProduct : product));
+                        setShowUpdateDialogue(false);
+                        setProductToUpdate(null);
+                    }}
                 />
             )}
         </div>
@@ -124,4 +103,3 @@ const AdminPage = () => {
 };
 
 export default AdminPage;
-

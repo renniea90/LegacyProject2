@@ -1,92 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import CustomAlert from './CustomAlert';
+import ProductForm from './ProductForm';
+import axios from 'axios';
 import '../CSS/Modal.css';
 
-Modal.setAppElement('#root'); 
+Modal.setAppElement('#root');
 
-const UpdateProduct = ({ product, onUpdate, onCancel }) => {
-    const [formData, setFormData] = useState({ ...product });
+const UpdateProduct = ({ product, onCancel, onUpdateSuccess }) => {
+  const [formData, setFormData] = useState({ ...product });
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
+  useEffect(() => {
+    setFormData({ ...product });
+  }, [product]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onUpdate(formData);
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    return (
-        <Modal
-            isOpen={true}
-            onRequestClose={onCancel}
-            contentLabel="Update Product Modal"
-            className="modal"
-            overlayClassName="modal-overlay"
-        >
-            <h2>Update Product</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label className="label1">
-                        Name:
-                        <input
-                         className="input1"
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
-                </div>
-                <div className="form-group">
-                    <label>
-                        Price:
-                        <input
-                         className="input1"
-                            type="number"
-                            name="price"
-                            value={formData.price}
-                            onChange={handleChange}
-                            step="0.01"
-                            required
-                        />
-                    </label>
-                </div>
-                <div className="form-group">
-                    <label>
-                        Quantity:
-                        <input
-                         className="input1"
-                            type="number"
-                            name="quantity"
-                            value={formData.quantity}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
-                </div>
-                <div className="form-group">
-                    <label>
-                        Image URL:
-                        <input
-                         className="input1"
-                            type="text"
-                            name="imageUrl"
-                            value={formData.imageUrl}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
-                </div>
-                <div className="button-group">
-                <button className="add-btn" type="submit">Update</button>
-                <button className="cancel-btn" type="button" onClick={onCancel}>Cancel</button>
-                </div>
-            </form>
-        </Modal>
-    );
+    try {
+      const response = await axios.patch(`http://localhost:8081/item/update/${formData.id}`, formData);
+      if (response.status === 200) {
+        setAlertMessage('Product successfully updated.');
+        setShowAlert(true);
+        onUpdateSuccess(formData);
+      } else {
+        setAlertMessage('Failed to update product.');
+        setShowAlert(true);
+      }
+    } catch (error) {
+      console.error('Error updating product:', error);
+      setAlertMessage('Failed to update product.');
+      setShowAlert(true);
+    }
+  };
+
+  return (
+    <div>
+      <Modal
+        isOpen={true}
+        onRequestClose={onCancel}
+        contentLabel="Update Product Modal"
+        className="modal"
+        overlayClassName="modal-overlay"
+      >
+        <h2>Update Product</h2>
+        <ProductForm
+          formData={formData}
+          onChange={setFormData}
+          onSubmit={handleSubmit}
+          onCancel={onCancel}
+          isUpdateMode={true}
+        />
+      </Modal>
+
+      {showAlert && (
+        <CustomAlert
+          message={alertMessage}
+          onClose={() => setShowAlert(false)}
+        />
+      )}
+    </div>
+  );
 };
 
 export default UpdateProduct;
