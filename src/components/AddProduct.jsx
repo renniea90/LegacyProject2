@@ -3,7 +3,7 @@ import axios from 'axios';
 import CustomAlert from "./CustomAlert";
 import Modal from 'react-modal';
 
-Modal.setAppElement('#root'); // Set the app element for accessibility
+Modal.setAppElement('#root'); 
 
 const AddProduct = ({ onAddProduct }) => {
   const [name, setName] = useState('');
@@ -13,7 +13,7 @@ const AddProduct = ({ onAddProduct }) => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [existingProducts, setExistingProducts] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,7 +67,7 @@ const AddProduct = ({ onAddProduct }) => {
  
       setExistingProducts([...existingProducts, data]);
       onAddProduct();
-      setIsModalOpen(false); // Close the modal after submission
+      setIsModalOpen(false); 
     } catch (error) {
       console.error('Error adding product:', error);
       setAlertMessage('Failed to add product.');

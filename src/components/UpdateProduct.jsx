@@ -28,9 +28,10 @@ const UpdateProduct = ({ product, onUpdate, onCancel }) => {
             <h2>Update Product</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label>
+                    <label className="label1">
                         Name:
                         <input
+                         className="input1"
                             type="text"
                             name="name"
                             value={formData.name}
@@ -43,6 +44,7 @@ const UpdateProduct = ({ product, onUpdate, onCancel }) => {
                     <label>
                         Price:
                         <input
+                         className="input1"
                             type="number"
                             name="price"
                             value={formData.price}
@@ -56,6 +58,7 @@ const UpdateProduct = ({ product, onUpdate, onCancel }) => {
                     <label>
                         Quantity:
                         <input
+                         className="input1"
                             type="number"
                             name="quantity"
                             value={formData.quantity}
@@ -68,6 +71,7 @@ const UpdateProduct = ({ product, onUpdate, onCancel }) => {
                     <label>
                         Image URL:
                         <input
+                         className="input1"
                             type="text"
                             name="imageUrl"
                             value={formData.imageUrl}
@@ -76,8 +80,8 @@ const UpdateProduct = ({ product, onUpdate, onCancel }) => {
                         />
                     </label>
                 </div>
-                <button type="submit">Update</button>
-                <button type="button" onClick={onCancel}>Cancel</button>
+                <button className="add-btn" type="submit">Update</button>
+                <button className="cancel-btn" type="button" onClick={onCancel}>Cancel</button>
             </form>
         </Modal>
     );
