@@ -3,7 +3,7 @@ import useFetchItems from '../components/FetchItems';
 import AddProduct from '../components/AddProduct';
 import UpdateProduct from '../components/UpdateProduct';
 import ProductListTable from '../components/ProductListTable';
-import DeleteProduct from '../components/DeleteProduct'; // Import the refactored component
+import DeleteProduct from '../components/DeleteProduct'; 
 import '../CSS/AdminPage.css'; 
 import '../CSS/Modal.css';
 

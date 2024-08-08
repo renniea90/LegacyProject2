@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
-import '../CSS/Modal.css'; // Ensure correct path
+import CustomAlert from './CustomAlert'; 
+import '../CSS/Modal.css'; 
 
 const API_URL = 'http://localhost:8081/item/remove/';
 
 const DeleteProduct = ({ productIdToDelete, onCancel, onConfirm }) => {
     const [showConfirmation, setShowConfirmation] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
 
     useEffect(() => {
-        // Open the confirmation dialog when a productIdToDelete is provided
         if (productIdToDelete !== null) {
             setShowConfirmation(true);
         }
@@ -19,16 +21,21 @@ const DeleteProduct = ({ productIdToDelete, onCancel, onConfirm }) => {
         try {
             const response = await axios.delete(`${API_URL}${productIdToDelete}`);
             if (response.status === 200) {
-                console.log(`Product with ID ${productIdToDelete} successfully deleted.`);
-                onConfirm(); // Notify parent to refetch items
+                setAlertMessage(`Product with ID ${productIdToDelete} successfully deleted.`);
             } else {
-                console.error('Failed to delete the product with ID:', productIdToDelete);
+                setAlertMessage(`Failed to delete the product with ID ${productIdToDelete}.`);
             }
         } catch (error) {
-            console.error('Error during deletion:', error);
+            setAlertMessage('Error during deletion.');
         } finally {
             setShowConfirmation(false);
+            setShowAlert(true);
         }
+    };
+
+    const handleAlertClose = () => {
+        setShowAlert(false);
+        onConfirm(); 
     };
 
     return (
@@ -38,7 +45,7 @@ const DeleteProduct = ({ productIdToDelete, onCancel, onConfirm }) => {
                     isOpen={true}
                     onRequestClose={() => {
                         setShowConfirmation(false);
-                        onCancel(); // Notify parent to cancel deletion
+                        onCancel(); 
                     }}
                     contentLabel="Confirmation Dialog"
                     className="modal"
@@ -47,13 +54,25 @@ const DeleteProduct = ({ productIdToDelete, onCancel, onConfirm }) => {
                     <h2>Confirmation</h2>
                     <p>Are you sure you want to delete this product?</p>
                     <div className="button-group">
-                        <button className="confirm-btn" onClick={handleConfirm}>Confirm</button>
+                        <button
+                            className="confirm-btn"
+                            onClick={handleConfirm}
+                        >
+                            Confirm
+                        </button>
                         <button className="cancel-btn" onClick={() => {
                             setShowConfirmation(false);
-                            onCancel(); // Notify parent to cancel deletion
+                            onCancel(); 
                         }}>Cancel</button>
                     </div>
                 </Modal>
+            )}
+            
+            {showAlert && (
+                <CustomAlert
+                    message={alertMessage}
+                    onClose={handleAlertClose} 
+                />
             )}
         </>
     );
