@@ -1,13 +1,23 @@
 import React from 'react';
-import '../CSS/ConfirmationDialogue.css';
+import Modal from 'react-modal';
+import '../CSS/Modal.css'; 
 
 const ConfirmationDialogue = ({ message, onConfirm, onCancel }) => {
     return (
-        <div className="confirmation-dialogue">
+        <Modal
+            isOpen={true}
+            onRequestClose={onCancel}
+            contentLabel="Confirmation Dialog"
+            className="modal"
+            overlayClassName="modal-overlay"
+        >
+            <h2>Confirmation</h2>
             <p>{message}</p>
-            <button onClick={onConfirm}>Confirm</button>
-            <button onClick={onCancel}>Cancel</button>
-        </div>
+            <div className="modal-buttons">
+                <button className="confirm-btn" onClick={onConfirm}>Confirm</button>
+                <button className="cancel-btn" onClick={onCancel}>Cancel</button>
+            </div>
+        </Modal>
     );
 };
 

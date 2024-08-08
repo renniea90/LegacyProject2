@@ -38,6 +38,16 @@
     border-radius: 4px;
     cursor: pointer;
   }
+
+  .confirm-btn {
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
   
 
   .input1 {

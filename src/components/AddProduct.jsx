@@ -77,7 +77,7 @@ const AddProduct = ({ onAddProduct }) => {
 
   return (
     <div>
-      <button onClick={() => setIsModalOpen(true)} className="add-btn">Add Product</button>
+      <button onClick={() => setIsModalOpen(true)} className="addproduct-btn">Add Product</button>
 
       <Modal
         isOpen={isModalOpen}

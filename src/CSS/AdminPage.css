@@ -1,20 +1,22 @@
 
 
+
 .container2 {
-    padding: 230px;
-    margin: 0 auto;
+  text-align: center;
+  padding: 200px 20px 20px 20px;
+  margin: 0 auto;
 }
 
-.pagetitle {
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
+
+.table-wrapper {
+  margin-top: 20px; 
+  padding: 0 20px;
 }
+
 
 .table-container {
-    max-height: 700px;
-    overflow: auto;
+  max-height: 700px;
+  overflow: auto;
 }
 
 
@@ -55,7 +57,7 @@ th {
   }
 
 
-.update-btn, .delete-btn {
+.update-btn, .delete-btn, .addproduct-btn {
     width: 220px;
     height: 50px;
     border: none;

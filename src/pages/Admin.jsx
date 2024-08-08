@@ -6,6 +6,7 @@ import UpdateProduct from '../components/UpdateProduct.jsx';
 import ProductListTable from '../components/ProductListTable';
 import '../CSS/AdminPage.css'; 
 import '../CSS/Modal.css';
+import Modal from 'react-modal';
 
 const AdminPage = () => {
     const [products, setProducts] = useState([]);
@@ -92,10 +93,10 @@ const AdminPage = () => {
 
     return (
         <div>
-            <div className="container2">
-                <h2 className="pagetitle">Add a New Product</h2>
-                <AddProduct onAddProduct={fetchProducts} />
+            <div className="container2">               
+            <AddProduct onAddProduct={fetchProducts} />
             </div>
+            <div className="table-wrapper">
             <ProductListTable
                 products={products}
                 onUpdate={handleUpdate}
@@ -103,6 +104,7 @@ const AdminPage = () => {
                 onRequestSort={requestSort}
                 sortConfig={sortConfig}
             />
+            </div>
             {showConfirmation && (
                 <ConfirmationDialogue
                     message="Are you sure you want to delete this product?"
