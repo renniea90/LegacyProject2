@@ -28,8 +28,8 @@ table {
 th {
   position: sticky;
   top: 0;
-  z-index: 2; /* Ensures the header stays on top */
-  background-color: goldenrod; /* Matches the header background color */
+  z-index: 2; 
+  background-color: goldenrod; 
   color: white;
   padding-top: 12px;
   padding-bottom: 12px;

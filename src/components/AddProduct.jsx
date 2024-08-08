@@ -15,6 +15,28 @@ const AddProduct = ({ onAddProduct }) => {
   const [existingProducts, setExistingProducts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); 
 
+ 
+  const handlePriceChange = (e) => {
+    let value = e.target.value;
+    
+
+    if (/^\d*\.?\d{0,2}$/.test(value)) {
+      setPrice(value);
+    }
+  };
+
+  
+
+ 
+  const handleQuantityChange = (e) => {
+    let value = e.target.value;
+    
+  
+    if (/^\d*$/.test(value)) {
+      setQuantity(value);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -41,7 +63,7 @@ const AddProduct = ({ onAddProduct }) => {
 
     const product = {
       name,
-      price: parseFloat(price),
+      price: parseFloat(price).toFixed(2), 
       quantity: parseInt(quantity, 10),
       imageUrl
     };
@@ -60,17 +82,15 @@ const AddProduct = ({ onAddProduct }) => {
       setAlertMessage(`New Product Added. Your Unique ID is ${data.id}`);
       setShowAlert(true);
     
-      // Reset the form fields
       setName('');
       setPrice('');
       setQuantity('');
       setImageUrl('');
-      
-      // Add the new product to the existing products array
+
       setExistingProducts([...existingProducts, data]);
       onAddProduct();
       
-      // Close the modal
+
       setIsModalOpen(false); 
     } catch (error) {
       console.error('Error adding product:', error);
@@ -107,11 +127,11 @@ const AddProduct = ({ onAddProduct }) => {
             <label className="label1">Price: </label>
             <input
               className="input1"
-              type="number"
+              type="text"
               step="0.01"
               required
               value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={handlePriceChange}           
             />
           </div>
 
@@ -119,10 +139,10 @@ const AddProduct = ({ onAddProduct }) => {
             <label className="label1">Quantity: </label>
             <input
               className="input1"
-              type="number"
+              type="text" 
               required
               value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
+              onChange={handleQuantityChange}
             />
           </div>
 
@@ -136,9 +156,10 @@ const AddProduct = ({ onAddProduct }) => {
               onChange={(e) => setImageUrl(e.target.value)}
             />
           </div>
-
-          <button className="add-btn" type="submit">Submit</button>
-          <button type="button" onClick={() => setIsModalOpen(false)} className="cancel-btn">Cancel</button>
+          <div className="button-group">
+            <button className="add-btn" type="submit">Submit</button>
+            <button type="button" onClick={() => setIsModalOpen(false)} className="cancel-btn">Cancel</button>
+          </div>
         </form>
       </Modal>
 

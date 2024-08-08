@@ -13,7 +13,7 @@ const ConfirmationDialogue = ({ message, onConfirm, onCancel }) => {
         >
             <h2>Confirmation</h2>
             <p>{message}</p>
-            <div className="modal-buttons">
+            <div className="button-group">
                 <button className="confirm-btn" onClick={onConfirm}>Confirm</button>
                 <button className="cancel-btn" onClick={onCancel}>Cancel</button>
             </div>

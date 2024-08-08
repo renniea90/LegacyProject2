@@ -6,7 +6,7 @@ import UpdateProduct from '../components/UpdateProduct.jsx';
 import ProductListTable from '../components/ProductListTable';
 import '../CSS/AdminPage.css'; 
 import '../CSS/Modal.css';
-import Modal from 'react-modal';
+
 
 const AdminPage = () => {
     const [products, setProducts] = useState([]);

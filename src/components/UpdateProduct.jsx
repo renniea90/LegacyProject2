@@ -80,8 +80,10 @@ const UpdateProduct = ({ product, onUpdate, onCancel }) => {
                         />
                     </label>
                 </div>
+                <div className="button-group">
                 <button className="add-btn" type="submit">Update</button>
                 <button className="cancel-btn" type="button" onClick={onCancel}>Cancel</button>
+                </div>
             </form>
         </Modal>
     );

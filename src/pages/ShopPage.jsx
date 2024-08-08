@@ -1,6 +1,7 @@
 import useFetchItems from '../components/FetchItems';
 import ItemList from '../components/ItemList';
-import ShopepageCSS from '../CSS/ShopPage.css'
+import '../CSS/ShopPage.css';
+
 
 const ShopPage = () => {
     const apiURL = 'http://localhost:8081/items/getAll';
