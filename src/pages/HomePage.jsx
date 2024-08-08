@@ -1,23 +1,20 @@
-import homeImage from '../homeImage.png'
-import { Link } from 'react-router-dom'
-
+import homeImage from '../homeImage.png';
+import { Link } from 'react-router-dom';
+import HomePagecss from '../CSS/HomePage.css'
 
 const HomePage = () => {
-    return(
-        <div className='body'>
-            
-                <div className='featurePanel'>
-                <h1 className='homeTitle'>It's not a mirage</h1>
-                <p className='featureText'>The hottest prices around!</p>
-                <button className='bannerButton'><Link to="/shop">Browse stationery</Link></button>
-                </div>
-                <img className='homeImage' src={homeImage}/>
-
-                
-
-
-        </div>
-    )
+    return (
+        <main className='home-body'>
+            <section className='feature-panel'>
+                <h1 className='home-title'>It's not a mirage</h1>
+                <p className='feature-text'>The hottest prices around!</p>
+                <Link to="/shop" className='banner-button'>
+                    Browse stationery
+                </Link>
+            </section>
+            <img className='home-image' src={homeImage} alt="Home banner" />
+        </main>
+    );
 }
 
 export default HomePage;
