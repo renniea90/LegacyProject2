@@ -1,64 +1,16 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import AddProduct from '../components/AddProduct';
-import appcss from '../CSS/App.css';
+import ConfirmationDialogue from '../components/ConfirmationDialogue';
+import UpdateProduct from '../components/UpdateProduct';
+import ProductListTable from '../components/ProductListTable';
+import '../CSS/AdminPage.css'; 
 
-function ConfirmationDialog({ message, onConfirm, onCancel }) {
-    return (
-        <div className="confirmation-dialog">
-            <p>{message}</p>
-            <button onClick={onConfirm}>Confirm</button>
-            <button onClick={onCancel}>Cancel</button>
-        </div>
-    );
-}
-
-function UpdateProductDialog({ product, onUpdate, onCancel }) {
-    const [formData, setFormData] = useState({ ...product });
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onUpdate(formData);
-    };
-
-    return (
-        <div className="update-dialog">
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Name:
-                    <input type="text" name="name" value={formData.name} onChange={handleChange} />
-                </label>
-                <label>
-                    Price:
-                    <input type="text" name="price" value={formData.price} onChange={handleChange} />
-                </label>
-                <label>
-                    Quantity:
-                    <input type="text" name="quantity" value={formData.quantity} onChange={handleChange} />
-                </label>
-                <label>
-                    Image URL:
-                    <input type="text" name="imageUrl" value={formData.imageUrl} onChange={handleChange} />
-                </label>
-                <button type="submit">Update</button>
-                <button type="button" onClick={onCancel}>Cancel</button>
-            </form>
-        </div>
-    );
-}
-
-function ProductList({ onProductUpdate }) {
-    const navigate = useNavigate();
+const AdminPage = () => {
     const [products, setProducts] = useState([]);
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [productIdToDelete, setProductIdToDelete] = useState(null);
-    const [showUpdateDialog, setShowUpdateDialog] = useState(false);
+    const [showUpdateDialogue, setShowUpdateDialogue] = useState(false);
     const [productToUpdate, setProductToUpdate] = useState(null);
     const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'ascending' });
 
@@ -87,11 +39,11 @@ function ProductList({ onProductUpdate }) {
 
     const handleUpdate = (product) => {
         setProductToUpdate(product);
-        setShowUpdateDialog(true);
+        setShowUpdateDialogue(true);
     };
 
     const handleUpdateCancel = () => {
-        setShowUpdateDialog(false);
+        setShowUpdateDialogue(false);
         setProductToUpdate(null);
     };
 
@@ -107,7 +59,7 @@ function ProductList({ onProductUpdate }) {
         } catch (error) {
             console.error('Error during update:', error);
         } finally {
-            setShowUpdateDialog(false);
+            setShowUpdateDialogue(false);
             setProductToUpdate(null);
         }
     };
@@ -129,16 +81,6 @@ function ProductList({ onProductUpdate }) {
         }
     };
 
-    const sortedProducts = [...products].sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? -1 : 1;
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? 1 : -1;
-        }
-        return 0;
-    });
-
     const requestSort = (key) => {
         let direction = 'ascending';
         if (sortConfig.key === key && sortConfig.direction === 'ascending') {
@@ -149,50 +91,26 @@ function ProductList({ onProductUpdate }) {
 
     return (
         <div>
-            <br /><br />
-            <div className="container2" >
+            <div className="container2">
                 <h2 className="pagetitle">Add a New Product</h2>
-                <AddProduct onAddProduct={fetchProducts}/>
+                <AddProduct onAddProduct={fetchProducts} />
             </div>
-            <div className="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th onClick={() => requestSort('id')}>Product ID ↑ ↓</th>
-                            <th onClick={() => requestSort('name')}>Product Name ↑ ↓</th>
-                            <th onClick={() => requestSort('price')}>Price ↑ ↓</th>
-                            <th onClick={() => requestSort('quantity')}>Quantity ↑ ↓</th>
-                            <th>Update Product</th>
-                            <th>Delete Product</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {sortedProducts.map((product) => (
-                            <tr key={product.id}>
-                                <td>{product.id}</td>
-                                <td>{product.name}</td>
-                                <td>{product.price}</td>
-                                <td>{product.quantity}</td>
-                                <td>
-                                    <button className="update-btn" onClick={() => handleUpdate(product)}>Update</button>
-                                </td>
-                                <td>
-                                    <button className="delete-btn" onClick={() => handleDelete(product.id)}>Delete</button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+            <ProductListTable
+                products={products}
+                onUpdate={handleUpdate}
+                onDelete={handleDelete}
+                onRequestSort={requestSort}
+                sortConfig={sortConfig}
+            />
             {showConfirmation && (
-                <ConfirmationDialog
+                <ConfirmationDialogue
                     message="Are you sure you want to delete this product?"
                     onConfirm={handleConfirm}
                     onCancel={handleCancel}
                 />
             )}
-            {showUpdateDialog && (
-                <UpdateProductDialog
+            {showUpdateDialogue && (
+                <UpdateProduct
                     product={productToUpdate}
                     onUpdate={handleUpdateSubmit}
                     onCancel={handleUpdateCancel}
@@ -200,6 +118,6 @@ function ProductList({ onProductUpdate }) {
             )}
         </div>
     );
-}
+};
 
-export default ProductList;
+export default AdminPage;
