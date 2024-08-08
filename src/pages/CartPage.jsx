@@ -1,6 +1,5 @@
 
-import Alert from "../components/eventcomponent/Alert"
-import addConfetti from '../components/eventcomponent/AddConfetti';
+import addConfetti from '../components/AddConfetti';
 
 export default function CartPage() {
     return(
