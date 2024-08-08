@@ -1,47 +1,18 @@
 import React, { useState } from 'react';
 import useFetchItems from '../components/FetchItems';
 import AddProduct from '../components/AddProduct';
-import ConfirmationDialogue from '../components/ConfirmationDialogue';
 import UpdateProduct from '../components/UpdateProduct';
 import ProductListTable from '../components/ProductListTable';
+import DeleteProduct from '../components/DeleteProduct'; // Import the refactored component
 import '../CSS/AdminPage.css'; 
 import '../CSS/Modal.css';
-import axios from 'axios';
 
 const AdminPage = () => {
     const { items: products, loading, error, refetch } = useFetchItems();
-    const [showConfirmation, setShowConfirmation] = useState(false);
-    const [productIdToDelete, setProductIdToDelete] = useState(null);
     const [productToUpdate, setProductToUpdate] = useState(null);
     const [showUpdateDialogue, setShowUpdateDialogue] = useState(false);
+    const [productIdToDelete, setProductIdToDelete] = useState(null);
     const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'ascending' });
-
-    const handleDelete = (id) => {
-        setProductIdToDelete(id);
-        setShowConfirmation(true);
-    };
-
-    const handleCancel = () => {
-        setShowConfirmation(false);
-        setProductIdToDelete(null);
-    };
-
-    const handleConfirm = async () => {
-        try {
-            const response = await axios.delete(`http://localhost:8081/item/remove/${productIdToDelete}`);
-            if (response.status === 200) {
-                console.log(`Product with ID ${productIdToDelete} successfully deleted.`);
-                refetch(); 
-            } else {
-                console.error('Failed to delete the product with ID:', productIdToDelete);
-            }
-        } catch (error) {
-            console.error('Error during deletion:', error);
-        } finally {
-            setShowConfirmation(false);
-            setProductIdToDelete(null);
-        }
-    };
 
     const requestSort = (key) => {
         let direction = 'ascending';
@@ -57,7 +28,7 @@ const AdminPage = () => {
     return (
         <div>
             <div className="container2">               
-                <AddProduct onAddProduct={refetch} /> {}
+                <AddProduct onAddProduct={refetch} /> 
             </div>
             <div className="table-wrapper">
                 <ProductListTable
@@ -66,16 +37,19 @@ const AdminPage = () => {
                         setProductToUpdate(product);
                         setShowUpdateDialogue(true);
                     }}
-                    onDelete={handleDelete}
+                    onDelete={(id) => setProductIdToDelete(id)} // Set ID to delete
                     onRequestSort={requestSort}
                     sortConfig={sortConfig}
                 />
             </div>
-            {showConfirmation && (
-                <ConfirmationDialogue
-                    message="Are you sure you want to delete this product?"
-                    onConfirm={handleConfirm}
-                    onCancel={handleCancel}
+            {productIdToDelete !== null && (
+                <DeleteProduct
+                    productIdToDelete={productIdToDelete}
+                    onCancel={() => setProductIdToDelete(null)} // Clear the ID
+                    onConfirm={() => {
+                        refetch(); // Refresh the products list
+                        setProductIdToDelete(null); // Clear the product ID
+                    }}
                 />
             )}
             {showUpdateDialogue && productToUpdate && (
@@ -83,7 +57,7 @@ const AdminPage = () => {
                     product={productToUpdate}
                     onCancel={() => setShowUpdateDialogue(false)}
                     onUpdateSuccess={() => {
-                        refetch(); 
+                        refetch(); // Refresh the products list
                         setShowUpdateDialogue(false);
                         setProductToUpdate(null);
                     }}
