@@ -1,5 +1,6 @@
 import useFetchItems from '../components/FetchItems';
 import ItemList from '../components/ItemList';
+import ShopepageCSS from '../CSS/ShopPage.css'
 
 const ShopPage = () => {
     const apiURL = 'http://localhost:8081/items/getAll';
@@ -7,8 +8,7 @@ const ShopPage = () => {
    
     return (
         <div className="body">
-            <h1 className="shopHeader">Our Stationery</h1>     
-            <ItemList items={items} />
+           <ItemList items={items} />
         </div>
     );
 };

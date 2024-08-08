@@ -1,22 +1,5 @@
 
 
-.card {
-  padding-bottom: 5px;
-  border-radius: 8px; 
-  width: 29.333%;
-  height: 400px;
-  margin: 2%;
-  text-align: center;
-  float: left;
-  box-shadow: 0 8px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.card-image{
-
- 
-  margin: 20px 0 20px 0;
-
-}
 
 
 
@@ -31,78 +14,15 @@
 
 
 
-.shopHeader {
-  color: goldenrod;
-}
-
-.cartButton{
-
-  padding: 10px 20px;
-  margin-top: 5px;
-  width: 50%;
-  background-color: goldenrod;
-  color: white;
-  border-radius: 5px;
-  border-color: transparent;
-}
-
-.inCartButton{
-
-  padding: 10px 20px;
-  margin-top: 5px;
-  width: 50%;
-  background-color: lightgrey;
-  color: golden;
-  border-radius: 5px;
-  border-color: transparent;
-}
-
-.shopItems {
-
-  align-items: center;
-
-  justify-content: center;
-
-  width: 100%;
-}
-
-.outOfStock {
-  padding-top: 50px;
-  color: red;
-  margin: 0px; 
-  padding-bottom: 10px; 
-}
-
-.quantityContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  gap: 8px; 
-  margin-top: 16px; 
-}
-
-.quantityLabel {
-  font-weight: bold; 
-}
 
 
-.quantityInput {
-  width: 60px; 
-  padding: 8px; 
-  border: 1px solid #ddd; 
-  border-radius: 4px; 
-  font-size: 16px; 
-  text-align: center;
-  outline: none; 
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-  
-}
 
 
-.quantityInput:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); 
-}
+
+
+
+
+
 
 .table-container {
 
