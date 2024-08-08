@@ -60,13 +60,17 @@ const AddProduct = ({ onAddProduct }) => {
       setAlertMessage(`New Product Added. Your Unique ID is ${data.id}`);
       setShowAlert(true);
     
+      // Reset the form fields
       setName('');
       setPrice('');
       setQuantity('');
       setImageUrl('');
- 
+      
+      // Add the new product to the existing products array
       setExistingProducts([...existingProducts, data]);
       onAddProduct();
+      
+      // Close the modal
       setIsModalOpen(false); 
     } catch (error) {
       console.error('Error adding product:', error);
@@ -136,14 +140,14 @@ const AddProduct = ({ onAddProduct }) => {
           <button className="add-btn" type="submit">Submit</button>
           <button type="button" onClick={() => setIsModalOpen(false)} className="cancel-btn">Cancel</button>
         </form>
-
-        {showAlert && (
-          <CustomAlert
-            message={alertMessage}
-            onClose={() => setShowAlert(false)}
-          />
-        )}
       </Modal>
+
+      {showAlert && (
+        <CustomAlert
+          message={alertMessage}
+          onClose={() => setShowAlert(false)}
+        />
+      )}
     </div>
   );
 };
