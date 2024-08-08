@@ -1,28 +1,21 @@
 import { useState } from 'react';
- 
-const ChangeButton = () => {
- 
-    const [buttonStatus, setButtonStatus] = useState("Not in Cart");
- 
-    if(buttonStatus=="Not in Cart"){
-    
-        return (
-            <>
-                <button className="cartButton" onClick={() => (setButtonStatus("InCart"))}>
-                    🛒 Add to Cart
-                </button>
-            </>
-        );
-    } else{
-        return (
-            <>
-                <button className="inCartButton" onClick={() => (setButtonStatus("Not in Cart"))}>
-                ✅ Added to Cart 
-                </button>
-            </>
-        );
 
-    }
-}
- 
-export default ChangeButton;
+const ChangeButton = () => {
+    const [isInCart, setIsInCart] = useState(false);
+  
+    const handleClick = () => {
+      setIsInCart(!isInCart);
+    };
+  
+    return (
+      <button
+        className={isInCart ? "inCartButton" : "cartButton"}
+        onClick={handleClick}
+        aria-label={isInCart ? "Remove from cart" : "Add to cart"}
+      >
+        {isInCart ? "✅ Added to Cart" : "🛒 Add to Cart"}
+      </button>
+    );
+  };
+  
+  export default ChangeButton;

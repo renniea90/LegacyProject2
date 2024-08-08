@@ -24,28 +24,6 @@
   
   }
 
-  .cartButton{
-
-    padding: 10px 20px;
-    margin-top: 5px;
-    width: 50%;
-    background-color: goldenrod;
-    color: white;
-    border-radius: 5px;
-    border-color: transparent;
-  }
-  
-  .inCartButton{
-  
-    padding: 10px 20px;
-    margin-top: 5px;
-    width: 50%;
-    background-color: lightgrey;
-    color: golden;
-    border-radius: 5px;
-    border-color: transparent;
-  }
-
   .outOfStock {
     padding-top: 50px;
     color: red;
