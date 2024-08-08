@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AddProduct from '../components/AddProduct';
 import ConfirmationDialogue from '../components/ConfirmationDialogue';
-import UpdateProduct from '../components/UpdateProduct';
+import UpdateProduct from '../components/UpdateProduct.jsx';
 import ProductListTable from '../components/ProductListTable';
 import '../CSS/AdminPage.css'; 
+import '../CSS/Modal.css';
 
 const AdminPage = () => {
     const [products, setProducts] = useState([]);
@@ -121,3 +122,4 @@ const AdminPage = () => {
 };
 
 export default AdminPage;
+

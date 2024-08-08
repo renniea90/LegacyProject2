@@ -1,5 +1,5 @@
-// src/components/ProductListTable.js
 import React from 'react';
+
 
 const ProductListTable = ({ products, onUpdate, onDelete, onRequestSort, sortConfig }) => {
     const sortedProducts = [...products].sort((a, b) => {

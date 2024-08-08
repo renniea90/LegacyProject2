@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import CustomAlert from "./CustomAlert";
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root'); // Set the app element for accessibility
 
 const AddProduct = ({ onAddProduct }) => {
   const [name, setName] = useState('');
@@ -9,10 +12,10 @@ const AddProduct = ({ onAddProduct }) => {
   const [imageUrl, setImageUrl] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
-
   const [existingProducts, setExistingProducts] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
 
-   useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:8081/items/getAll');
@@ -64,6 +67,7 @@ const AddProduct = ({ onAddProduct }) => {
  
       setExistingProducts([...existingProducts, data]);
       onAddProduct();
+      setIsModalOpen(false); // Close the modal after submission
     } catch (error) {
       console.error('Error adding product:', error);
       setAlertMessage('Failed to add product.');
@@ -73,53 +77,65 @@ const AddProduct = ({ onAddProduct }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label className="label1">Name: </label>
-          <input
-            className="input1"
-            type="text"
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
+      <button onClick={() => setIsModalOpen(true)} className="add-btn">Add Product</button>
 
-        <div className="form-group">
-          <label className="label1">Price: </label>
-          <input
-            className="input1"
-            type="number"
-            step="0.01"
-            required
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </div>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        contentLabel="Add Product Modal"
+        className="modal"
+        overlayClassName="modal-overlay"
+      >
+        <h2>Add Product</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label className="label1">Name: </label>
+            <input
+              className="input1"
+              type="text"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
 
-        <div className="form-group">
-          <label className="label1">Quantity: </label>
-          <input
-            className="input1"
-            type="number"
-            required
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-          />
-        </div>
+          <div className="form-group">
+            <label className="label1">Price: </label>
+            <input
+              className="input1"
+              type="number"
+              step="0.01"
+              required
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
 
-        <div className="form-group">
-          <label className="label1">Image URL: </label>
-          <input
-            className="input1"
-            type="text"
-            required
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-          />
-        </div>
+          <div className="form-group">
+            <label className="label1">Quantity: </label>
+            <input
+              className="input1"
+              type="number"
+              required
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+            />
+          </div>
 
-        <button className="add-btn" type="submit">Add Product</button>
+          <div className="form-group">
+            <label className="label1">Image URL: </label>
+            <input
+              className="input1"
+              type="text"
+              required
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
+            />
+          </div>
+
+          <button className="add-btn" type="submit">Submit</button>
+          <button type="button" onClick={() => setIsModalOpen(false)} className="cancel-btn">Cancel</button>
+        </form>
 
         {showAlert && (
           <CustomAlert
@@ -127,7 +143,7 @@ const AddProduct = ({ onAddProduct }) => {
             onClose={() => setShowAlert(false)}
           />
         )}
-      </form>
+      </Modal>
     </div>
   );
 };

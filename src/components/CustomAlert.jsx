@@ -1,4 +1,4 @@
-import customalertcss from '../CSS/CustomAlert.css';
+import '../CSS/CustomAlert.css';
 
 const CustomAlert = ({ message, onClose }) => {
     return (
