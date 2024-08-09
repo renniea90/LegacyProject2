@@ -13,7 +13,7 @@ const UpdateProduct = ({ product, onCancel, onUpdateSuccess }) => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(true);
-  const { items: existingProducts, loading, error } = useFetchItems();
+  const { items: existingProducts, error } = useFetchItems();
 
   useEffect(() => {
     setFormData({ ...product });
@@ -21,13 +21,6 @@ const UpdateProduct = ({ product, onCancel, onUpdateSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (loading) {
-      setAlertMessage('Still loading existing products. Please wait.');
-      setShowAlert(true);
-      setIsModalVisible(false); 
-      return;
-    }
 
     if (error) {
       setAlertMessage('Error loading existing products. Please try again later.');

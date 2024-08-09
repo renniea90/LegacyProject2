@@ -4,10 +4,9 @@ import ItemList from '../components/ItemList';
 import '../CSS/ShopPage.css';
 
 const ShopPage = () => {
-  const { items, loading, error } = useFetchItems();
+  const { items, error } = useFetchItems();
 
-  if (loading) return <div>Loading items...</div>;
-  if (error) return <div>Error loading items: {error.message}</div>;
+    if (error) return <div>Error loading items: {error.message}</div>;
 
   return (
     <div className="body">

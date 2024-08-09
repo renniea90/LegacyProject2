@@ -8,7 +8,7 @@ import '../CSS/AdminPage.css';
 import '../CSS/Modal.css';
 
 const AdminPage = () => {
-    const { items: products, loading, error, refetch } = useFetchItems();
+    const { items: products, error, refetch } = useFetchItems();
     const [productToUpdate, setProductToUpdate] = useState(null);
     const [showUpdateDialogue, setShowUpdateDialogue] = useState(false);
     const [productIdToDelete, setProductIdToDelete] = useState(null);
@@ -22,7 +22,7 @@ const AdminPage = () => {
         setSortConfig({ key, direction });
     };
 
-    if (loading) return <div>Loading products...</div>;
+   
     if (error) return <div>Error loading products: {error.message}</div>;
 
     return (

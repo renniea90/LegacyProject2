@@ -1,19 +1,7 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 import ItemCard from '../components/ItemCard';
 
 const ItemList = ({ items }) => {
-    const [isLoading, setIsLoading] = useState(true);
-    
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 300); 
-
-      
-        return () => clearTimeout(timer);
-    }, []);
-
     if (!Array.isArray(items)) {
         console.error('Expected items to be an array');
         return null;
@@ -21,23 +9,19 @@ const ItemList = ({ items }) => {
 
     return (
         <div className="item-list" role="list">
-            {isLoading ? (
-                <p className='loading'>Loading...</p> 
+            {items.length > 0 ? (
+                items.map((item) => (
+                    <ItemCard
+                        key={item.id}
+                        id={item.id}
+                        name={item.name}
+                        price={item.price}
+                        imageUrl={item.imageUrl}
+                        quantity={item.quantity}
+                    />
+                ))
             ) : (
-                items.length > 0 ? (
-                    items.map((item) => (
-                        <ItemCard
-                            key={item.id}
-                            id={item.id}
-                            name={item.name}
-                            price={item.price}
-                            imageUrl={item.imageUrl}
-                            quantity={item.quantity}
-                        />
-                    ))
-                ) : (
-                    <p className='noitems'>No items available</p>
-                )
+                <p className='noitems'>No items available</p>
             )}
         </div>
     );

@@ -20,7 +20,7 @@ const AddProduct = ({ onAddProduct }) => {
   const [isModalVisible, setIsModalVisible] = useState(true);
 
  
-  const { items: existingProducts, loading, error } = useFetchItems();
+  const { items: existingProducts, error } = useFetchItems();
 
   useEffect(() => {
     if (error) {
