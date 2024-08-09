@@ -1,18 +1,29 @@
-// ItemCard.js
 import React, { useState, useCallback } from 'react';
-import CartButton from './CartButton';
 import { useCart } from './CartContext';
 
 const ItemCard = ({ id, name, price, imageUrl, quantity }) => {
     const [inputQuantity, setInputQuantity] = useState(1);
-    const { addToCart } = useCart();
+    const { addToCart, cartItems } = useCart();
+
+    const getQuantityInCart = () => {
+        const itemInCart = cartItems.find((item) => item.id === id);
+        return itemInCart ? itemInCart.quantity : 0;
+    };
 
     const handleQuantityChange = useCallback((event) => {
         setInputQuantity(parseInt(event.target.value, 10));
     }, []);
 
+
     const handleAddToCart = () => {
-        addToCart({ id, name, price, imageUrl, quantity: inputQuantity });
+        const quantityInCart = getQuantityInCart();
+        const totalQuantity = quantityInCart + inputQuantity;
+
+        if (totalQuantity > quantity) {
+            alert(`Cannot add more than ${quantity - quantityInCart} items to the cart.`);
+        } else {
+            addToCart({ id, name, price, imageUrl, quantity: inputQuantity });
+        }
     };
 
     return (
