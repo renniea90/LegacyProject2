@@ -8,7 +8,7 @@ export function CartProvider({children}){
 
     const [itemsInCart, setItemsInCart] = useState([]);
 
-    //search for item in the data file matching the ID's
+
     function addToCart(itemId){
         console.log("addToCart called with itemId:", itemId);
 
@@ -20,7 +20,7 @@ export function CartProvider({children}){
 
     }
 
-    //what we are passing down
+    
     const contextValue = {
         itemsInCart,
         addToCart

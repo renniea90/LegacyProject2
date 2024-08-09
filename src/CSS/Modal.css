@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1000;
 }
 
 
@@ -19,6 +20,7 @@
   max-width: 90%;
   box-shadow: 0 4px 6px rgba(70, 48, 48, 0.1);
   position: relative;
+  z-index: 1000;
 }
 
 .cancel-btn {
