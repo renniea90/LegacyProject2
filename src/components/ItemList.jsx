@@ -20,7 +20,7 @@ const ItemList = ({ items }) => {
     }
 
     return (
-        <div className="shopItems" role="list">
+        <div className="item-list" role="list">
             {isLoading ? (
                 <p className='loading'>Loading...</p> 
             ) : (
