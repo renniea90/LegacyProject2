@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const ProductListTable = ({ products, onUpdate, onDelete, onRequestSort, sortConfig }) => {
+const ProductListTable = ({ products, onUpdate, onDelete }) => {
+    
+    const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'descending' });
 
     const sortedProducts = [...products].sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -11,6 +13,14 @@ const ProductListTable = ({ products, onUpdate, onDelete, onRequestSort, sortCon
         }
         return 0;
     });
+
+    const onRequestSort = (key) => {
+        let direction = 'ascending';
+        if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+            direction = 'descending';
+        }
+        setSortConfig({ key, direction });
+    };
 
     return (
         <div className="table-container">
@@ -34,10 +44,9 @@ const ProductListTable = ({ products, onUpdate, onDelete, onRequestSort, sortCon
                             <td>£{product.price.toFixed(2)}</td>
                             <td>{product.quantity}</td>
                             <td>
-                              
                                 <img
                                     src={product.imageUrl}
-                                    alt={product.name}                                
+                                    alt={product.name}
                                 />
                             </td>
                             <td>
