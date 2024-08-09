@@ -18,9 +18,10 @@
   }
   
   .card-image{
-  
-   
-    margin: 20px 0 20px 0;
+     
+    margin: 10px 0 10px 0;
+    width: 60px;
+    height: 60px;
   
   }
 
@@ -63,22 +64,29 @@
   }
   
   
-  .quantityInput {
-    width: 60px; 
-    padding: 8px; 
-    border: 1px solid #ddd; 
-    border-radius: 4px; 
-    font-size: 16px; 
-    text-align: center;
-    outline: none; 
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-    
+  .quantityDropdown {
+    width: 80px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-right: 8px;
   }
   
+  .quantityInput {
+    width: 80px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    text-align: center;
+    outline: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
   
   .quantityInput:focus {
     border-color: #007bff;
-    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); 
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
   }
-
+  
   

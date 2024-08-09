@@ -8,7 +8,7 @@ const useFetchItems = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Define a function to fetch items
+
     const fetchItems = useCallback(async () => {
         try {
             setLoading(true);
@@ -23,7 +23,7 @@ const useFetchItems = () => {
         }
     }, []);
 
-    // Fetch items when the component mounts
+
     useEffect(() => {
         fetchItems();
     }, [fetchItems]);

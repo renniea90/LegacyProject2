@@ -2,8 +2,8 @@
 
 .cartButton{
 
-  padding: 10px 20px;
-  margin-top: 5px;
+  padding: 5px 20px;
+  margin-top: 0px;
   width: 50%;
   background-color: goldenrod;
   color: white;
@@ -13,8 +13,8 @@
 
 .inCartButton{
 
-  padding: 10px 20px;
-  margin-top: 5px;
+  padding: 5px 20px;
+  margin-top: 0px;
   width: 50%;
   background-color: lightgrey;
   color: golden;

@@ -1,25 +1,13 @@
 import { useState, useCallback } from "react";
 import CartButton from "./CartButton";
-import CustomAlert from "./CustomAlert";
 
 function ItemCard({ id, name, price, imageUrl, quantity }) {
   const [inputQuantity, setInputQuantity] = useState(1);
-  const [alertMessage, setAlertMessage] = useState('');
 
   const handleQuantityChange = useCallback((event) => {
-    const value = event.target.value;
-    const numberValue = parseInt(value, 10);
-
-    if (value === '') {
-      setInputQuantity('');
-    } else if (!isNaN(numberValue) && numberValue >= 1 && numberValue <= quantity) {
-      setInputQuantity(numberValue);
-      setAlertMessage('');
-    } else if (numberValue > quantity) {
-      setInputQuantity(quantity);
-      setAlertMessage(`You can only select up to ${quantity} items.`);
-    }
-  }, [quantity]);
+    const numberValue = parseInt(event.target.value, 10);
+    setInputQuantity(numberValue);
+  }, []);
 
   return (
     <div className="card">
@@ -27,29 +15,27 @@ function ItemCard({ id, name, price, imageUrl, quantity }) {
       <h3>£{price?.toFixed(2)}</h3>
       <img className="card-image" src={imageUrl} alt={name} height={"50px"} />
       <br />
+      <p className="stock-info">Amount Available: {quantity}</p>
       {quantity > 0 ? (
         <div className="quantityContainer">
           <label htmlFor={`quantity-${id}`} className="quantityLabel">Qty:</label>
-          <input
+          
+          <select
             id={`quantity-${id}`}
-            type="number"
-            min="1"
-            max={quantity}
             value={inputQuantity}
             onChange={handleQuantityChange}
-            className="quantityInput"
-          />
+            className="quantityDropdown"
+          >
+            {Array.from({ length: quantity }, (_, i) => i + 1).map((num) => (
+              <option key={num} value={num}>{num}</option>
+            ))}
+          </select>
+          
           <br />
           <CartButton />
         </div>
       ) : (
         <h3 className="outOfStock">Out of Stock</h3>
-      )}
-      {alertMessage && (
-        <CustomAlert
-          message={alertMessage}
-          onClose={() => setAlertMessage('')}     
-        />
       )}
     </div>
   );
