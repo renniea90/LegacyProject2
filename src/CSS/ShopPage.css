@@ -1,9 +1,10 @@
-.body {
+body {
+  position: relative;
   width: 90%;
   margin-left: 5%;
   margin-right: 5%;
   height: 600px;
-  padding-top: 60px; 
+  padding-top: 60px;
 }
 
 
@@ -104,5 +105,68 @@ button:disabled {
 @media (max-width: 768px) {
   .item-list {
     grid-template-columns: 1fr; 
+  }
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; 
+}
+
+
+.popup {
+  position: fixed;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 4px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  z-index: 1001;
+ 
+}
+
+
+@keyframes popup-animation {
+  from {
+      transform: scale(0.5);
+      opacity: 0;
+  }
+  to {
+      transform: scale(1);
+      opacity: 1;
+  }
+}
+
+.popup button {
+  background-color: goldenrod; 
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.popup button:hover {
+  background-color: #cc9900; }
+
+
+@media (max-width: 600px) {
+  .popup {
+      width: 80%;
   }
 }

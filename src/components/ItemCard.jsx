@@ -1,12 +1,15 @@
 import React, { useState, useCallback } from 'react';
 import { useCart } from './CartContext';
-import CustomAlert from '../components/CustomAlert'; 
+import { useNavigate } from 'react-router-dom';
+import CustomAlert from '../components/CustomAlert';
 
 const ItemCard = ({ id, name, price, imageUrl, quantity }) => {
     const [inputQuantity, setInputQuantity] = useState(1);
     const { cartItems, addToCart } = useCart();
+    const navigate = useNavigate(); 
     const [alertMessage, setAlertMessage] = useState('');
     const [showAlert, setShowAlert] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
 
     const handleQuantityChange = useCallback((event) => {
         setInputQuantity(parseInt(event.target.value, 10));
@@ -21,11 +24,20 @@ const ItemCard = ({ id, name, price, imageUrl, quantity }) => {
             setShowAlert(true);
         } else {
             addToCart({ id, name, price, imageUrl, quantity: inputQuantity });
+            setShowPopup(true);  
         }
     };
 
     const closeAlert = () => {
         setShowAlert(false);
+    };
+
+    const closePopup = () => {
+        setShowPopup(false);
+    };
+
+    const goToCart = () => {
+       navigate('/cart');  
     };
 
     return (
@@ -55,6 +67,13 @@ const ItemCard = ({ id, name, price, imageUrl, quantity }) => {
                 <h3 className="outOfStock">Out of Stock</h3>
             )}
             {showAlert && <CustomAlert message={alertMessage} onClose={closeAlert} />}
+            {showPopup && (
+                <div className="popup">
+                    <p>Item added to cart!</p>
+                    <button onClick={goToCart}>Go to Cart</button>
+                    <button onClick={closePopup}>Continue Shopping</button>
+                </div>
+            )}
         </div>
     );
 };
