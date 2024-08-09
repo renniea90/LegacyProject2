@@ -40,14 +40,15 @@ const AddProduct = ({ onAddProduct }) => {
       return;
     }
 
-    const productExists = existingProducts.some(p => p.name === formData.name);
+    const productExists = existingProducts.some(p => p.name.toLowerCase() === formData.name.toLowerCase());
 
-    if (productExists) {
-      setAlertMessage('Product already exists. Please enter a different product.');
-      setIsModalVisible(false); 
-      setShowAlert(true);
-      return;
-    }
+if (productExists) {
+  setAlertMessage('Product already exists. Please enter a different product.');
+  setIsModalVisible(false); 
+  setShowAlert(true);
+  return;
+}
+
 
     try {
       const postResponse = await axios.post('http://localhost:8081/item/add', {

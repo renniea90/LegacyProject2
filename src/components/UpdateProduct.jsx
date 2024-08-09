@@ -30,14 +30,17 @@ const UpdateProduct = ({ product, onCancel, onUpdateSuccess }) => {
     }
 
   
-    const productNameExists = existingProducts.some(p => p.name === formData.name && p.id !== formData.id);
-
+    const productNameExists = existingProducts.some(p => 
+      p.name.toLowerCase() === formData.name.toLowerCase() && p.id !== formData.id
+    );
+    
     if (productNameExists) {
       setAlertMessage('Product name already exists. Please choose a different name.');
       setShowAlert(true);
       setIsModalVisible(false); 
       return;
     }
+    
 
     try {
       const response = await axios.patch(`http://localhost:8081/item/update/${formData.id}`, formData);
