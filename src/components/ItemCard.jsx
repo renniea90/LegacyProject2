@@ -1,29 +1,31 @@
 import React, { useState, useCallback } from 'react';
 import { useCart } from './CartContext';
+import CustomAlert from '../components/CustomAlert'; 
 
 const ItemCard = ({ id, name, price, imageUrl, quantity }) => {
     const [inputQuantity, setInputQuantity] = useState(1);
-    const { addToCart, cartItems } = useCart();
-
-    const getQuantityInCart = () => {
-        const itemInCart = cartItems.find((item) => item.id === id);
-        return itemInCart ? itemInCart.quantity : 0;
-    };
+    const { cartItems, addToCart } = useCart();
+    const [alertMessage, setAlertMessage] = useState('');
+    const [showAlert, setShowAlert] = useState(false);
 
     const handleQuantityChange = useCallback((event) => {
         setInputQuantity(parseInt(event.target.value, 10));
     }, []);
 
-
     const handleAddToCart = () => {
-        const quantityInCart = getQuantityInCart();
-        const totalQuantity = quantityInCart + inputQuantity;
+        const existingCartItem = cartItems.find(item => item.id === id);
+        const totalQuantity = existingCartItem ? existingCartItem.quantity + inputQuantity : inputQuantity;
 
         if (totalQuantity > quantity) {
-            alert(`Cannot add more than ${quantity - quantityInCart} items to the cart.`);
+            setAlertMessage(`Cannot add more than ${quantity} items to the cart.`);
+            setShowAlert(true);
         } else {
             addToCart({ id, name, price, imageUrl, quantity: inputQuantity });
         }
+    };
+
+    const closeAlert = () => {
+        setShowAlert(false);
     };
 
     return (
@@ -52,6 +54,7 @@ const ItemCard = ({ id, name, price, imageUrl, quantity }) => {
             ) : (
                 <h3 className="outOfStock">Out of Stock</h3>
             )}
+            {showAlert && <CustomAlert message={alertMessage} onClose={closeAlert} />}
         </div>
     );
 };

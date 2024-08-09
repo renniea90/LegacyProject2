@@ -1,23 +1,100 @@
 .cart-page {
-    padding: 20rem;
-}
-
-table {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    padding-top: 120px; 
+  }
+  
+  .cart-page h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: goldenrod;
+  }
+  
+  table {
     width: 100%;
     border-collapse: collapse;
-}
-
-th, td {
+    margin-bottom: 20px;
+  }
+  
+  th, td {
     border: 1px solid #ddd;
-    padding: 0.5rem;
+    padding: 12px;
     text-align: center;
-}
-
-th {
+  }
+  
+  th {
     background-color: goldenrod;
     color: white;
-}
-
-tfoot td {
+  }
+  
+  tfoot td {
     font-weight: bold;
-}
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: goldenrod;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #cc9900;
+  }
+  
+  button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+  
+  select {
+    width: 100px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  
+  tfoot tr {
+    background-color: #f4f4f4;
+  }
+  
+  tfoot tr td {
+    padding: 15px;
+  }
+  
+  tfoot tr td:first-child {
+    font-weight: bold;
+  }
+  
+  tfoot tr td:last-child {
+    font-weight: normal;
+  }
+  
+  @media (max-width: 768px) {
+    .cart-page {
+      padding: 10px;
+    }
+  
+    table {
+      font-size: 14px;
+    }
+  
+    button {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+  
+    select {
+      width: 80px;
+      font-size: 14px;
+    }
+  }
+  
