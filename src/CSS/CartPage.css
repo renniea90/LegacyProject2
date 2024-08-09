@@ -32,6 +32,21 @@
   tfoot td {
     font-weight: bold;
   }
+
+  .button-row {
+    text-align: center; 
+    padding: 20px 0;
+}
+
+.save-cart-btn, .checkout-btn {
+    margin: 0 10px; /* Add gap between the buttons */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: goldenrod;
+    color: white;
+}
   
   button {
     padding: 10px 20px;

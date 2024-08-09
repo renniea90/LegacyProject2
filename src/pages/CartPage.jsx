@@ -1,17 +1,18 @@
 import '../CSS/CartPage.css';
 import React, { useEffect, useState } from 'react';
 import { useCart } from '../components/CartContext';
-import useFetchItems from '../components/FetchItems'; 
+import useFetchItems from '../components/FetchItems';
+import SaveCartButton from '../components/SaveCartButton';
+import CheckoutButton from '../components/CheckoutButton';
 
 const CartPage = () => {
     const { cartItems, updateQuantity, removeFromCart } = useCart();
     const { items } = useFetchItems();
     const [itemMap, setItemMap] = useState({});
 
-
     useEffect(() => {
         const map = items.reduce((acc, item) => {
-            acc[item.id] = item.quantity; 
+            acc[item.id] = item.quantity;
             return acc;
         }, {});
         setItemMap(map);
@@ -87,6 +88,12 @@ const CartPage = () => {
                         <td colSpan="3">Total</td>
                         <td>£{(total + parseFloat(serviceCharge)).toFixed(2)}</td>
                         <td></td>
+                    </tr>
+                    <tr>
+                        <td colSpan="5" className="button-row">
+                            <SaveCartButton cartItems={cartItems} />
+                            <CheckoutButton cartItems={cartItems} />
+                        </td>
                     </tr>
                 </tfoot>
             </table>
