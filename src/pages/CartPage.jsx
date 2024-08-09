@@ -8,7 +8,7 @@ const CartPage = () => {
     const { items } = useFetchItems();
     const [itemMap, setItemMap] = useState({});
 
-   
+
     useEffect(() => {
         const map = items.reduce((acc, item) => {
             acc[item.id] = item.quantity; 
@@ -29,6 +29,13 @@ const CartPage = () => {
     const calculateTotal = () => {
         return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
     };
+
+    const calculateServiceCharge = (total) => {
+        return (total * 0.075).toFixed(2);
+    };
+
+    const total = parseFloat(calculateTotal());
+    const serviceCharge = calculateServiceCharge(total);
 
     return (
         <div className="cart-page">
@@ -67,8 +74,18 @@ const CartPage = () => {
                 </tbody>
                 <tfoot>
                     <tr>
+                        <td colSpan="3">Subtotal</td>
+                        <td>£{total}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colSpan="3">Service Charge (7.5%)</td>
+                        <td>£{serviceCharge}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
                         <td colSpan="3">Total</td>
-                        <td>£{calculateTotal()}</td>
+                        <td>£{(total + parseFloat(serviceCharge)).toFixed(2)}</td>
                         <td></td>
                     </tr>
                 </tfoot>
