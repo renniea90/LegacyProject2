@@ -45,7 +45,7 @@ const UpdateProduct = ({ product, onCancel, onUpdateSuccess }) => {
         className="modal"
         overlayClassName="modal-overlay"
       >
-        <h2>Update Product</h2>
+        <h2>Update Product {formData.id}</h2>
         <ProductForm
           formData={formData}
           onChange={setFormData}
