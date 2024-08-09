@@ -3,6 +3,7 @@ import axios from 'axios';
 import CustomAlert from './CustomAlert';
 import Modal from 'react-modal';
 import ProductForm from './ProductForm';
+import useFetchItems from './FetchItems';  
 
 Modal.setAppElement('#root');
 
@@ -15,29 +16,26 @@ const AddProduct = ({ onAddProduct }) => {
   });
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
-  const [existingProducts, setExistingProducts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(true);
+
+ 
+  const { items: existingProducts, loading, error } = useFetchItems();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:8081/items/getAll');
-        setExistingProducts(response.data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-        setAlertMessage('Failed to fetch existing products.');
-        setShowAlert(true);
-      }
-    };
-
-    fetchData();
-  }, []);
+    if (error) {
+      setAlertMessage('Failed to fetch existing products.');
+      setIsModalVisible(false); 
+      setShowAlert(true);
+    }
+  }, [error]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.name || !formData.price || !formData.quantity || !formData.imageUrl) {
       setAlertMessage('All fields are required.');
+      setIsModalVisible(false); 
       setShowAlert(true);
       return;
     }
@@ -46,6 +44,7 @@ const AddProduct = ({ onAddProduct }) => {
 
     if (productExists) {
       setAlertMessage('Product already exists. Please enter a different product.');
+      setIsModalVisible(false); 
       setShowAlert(true);
       return;
     }
@@ -65,7 +64,6 @@ const AddProduct = ({ onAddProduct }) => {
         quantity: '',
         imageUrl: ''
       });
-      setExistingProducts([...existingProducts, data]);
       onAddProduct();
       setIsModalOpen(false);
     } catch (error) {
@@ -75,29 +73,38 @@ const AddProduct = ({ onAddProduct }) => {
     }
   };
 
+  const closeAlert = () => {
+    setShowAlert(false);
+    setIsModalVisible(true); 
+  };
+
   return (
     <div>
       <button onClick={() => setIsModalOpen(true)} className="addproduct-btn">Add Product</button>
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
-        shouldCloseOnOverlayClick={false}
-        contentLabel="Add Product Modal"
-        className="modal"
-        overlayClassName="modal-overlay"
-      >
-        <h2>Add Product</h2>
-        <ProductForm
-          formData={formData}
-          onChange={setFormData}
-          onSubmit={handleSubmit}
-          onCancel={() => setIsModalOpen(false)}
-        />
-      </Modal>
+
+      {isModalOpen && isModalVisible && (
+        <Modal
+          isOpen={isModalOpen}
+          onRequestClose={() => setIsModalOpen(false)}
+          shouldCloseOnOverlayClick={false}
+          contentLabel="Add Product Modal"
+          className="modal"
+          overlayClassName="modal-overlay"
+        >
+          <h2>Add Product</h2>
+          <ProductForm
+            formData={formData}
+            onChange={setFormData}
+            onSubmit={handleSubmit}
+            onCancel={() => setIsModalOpen(false)}
+          />
+        </Modal>
+      )}
+
       {showAlert && (
         <CustomAlert
           message={alertMessage}
-          onClose={() => setShowAlert(false)}
+          onClose={closeAlert} 
         />
       )}
     </div>
