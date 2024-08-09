@@ -4,8 +4,7 @@ import { useCart } from '../components/CartContext';
 import useFetchItems from '../components/FetchItems';
 import SaveCartButton from '../components/SaveCartButton';
 import CheckoutButton from '../components/CheckoutButton';
-import RetrieveCart from '../components/RetrieveCart'; // Import the new component
-import axios from 'axios';
+import RetrieveCart from '../components/RetrieveCart'; 
 
 const CartPage = () => {
     const { cartItems, updateQuantity, removeFromCart } = useCart();
@@ -121,8 +120,10 @@ const CartPage = () => {
                     </tr>
                     <tr>
                         <td colSpan="5" className="button-row">
+                            <div>
                             <SaveCartButton cartItems={cartItems} />
                             <CheckoutButton cartItems={cartItems} />
+                            </div>
                         </td>
                     </tr>
                 </tfoot>

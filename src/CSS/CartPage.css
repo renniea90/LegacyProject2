@@ -18,6 +18,7 @@
     margin-bottom: 20px;
   }
   
+  
   th, td {
     border: 1px solid #ddd;
     padding: 12px;
@@ -34,18 +35,32 @@
   }
 
   .button-row {
-    text-align: center; 
-    padding: 20px 0;
+    display: table-cell;
+    text-align: center;
+    padding: 20px 0; 
+    background-color: #f4f4f4; 
+    border-top: 1px solid #ddd;
+    vertical-align: middle;
 }
 
+.button-row > div {
+    display: flex;
+    justify-content: center; 
+    gap: 20px; }
+
 .save-cart-btn, .checkout-btn {
-    margin: 0 10px; 
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     background-color: goldenrod;
     color: white;
+    font-size: 16px;   
+    display: inline-block;
+}
+
+.save-cart-btn:hover, .checkout-btn:hover {
+    background-color: #cc9900;
 }
 
 .retrieve-cart {

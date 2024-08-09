@@ -1,25 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import CustomAlert from './CustomAlert';
 
 const SaveCartButton = ({ cartItems }) => {
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+
     const handleSaveCart = async () => {
         try {
-            const response = await axios.post('http://localhost:8081/cart/save', { items: cartItems });
+            const response = await axios.post('http://localhost:8081/cart/save', { cartItems });
             if (response.status === 200) {
-                alert('Cart successfully saved!');
+                setAlertMessage('Cart successfully saved.');
             } else {
-                alert('Failed to save cart.');
+                setAlertMessage('Failed to save cart.');
             }
         } catch (error) {
             console.error('Error saving cart:', error);
-            alert('Error saving cart.');
+            setAlertMessage('Failed to save cart.');
         }
+        setShowAlert(true);
+    };
+
+    const closeAlert = () => {
+        setShowAlert(false);
     };
 
     return (
-        <button onClick={handleSaveCart} className="save-cart-btn">
-            Save Cart
-        </button>
+        <div>
+            <button className="save-cart-btn" onClick={handleSaveCart}>Save Cart</button>
+            {showAlert && <CustomAlert message={alertMessage} onClose={closeAlert} />}
+        </div>
     );
 };
 
