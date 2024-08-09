@@ -1,9 +1,21 @@
 import '../CSS/CartPage.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCart } from '../components/CartContext';
+import useFetchItems from '../components/FetchItems'; 
 
 const CartPage = () => {
     const { cartItems, updateQuantity, removeFromCart } = useCart();
+    const { items } = useFetchItems();
+    const [itemMap, setItemMap] = useState({});
+
+   
+    useEffect(() => {
+        const map = items.reduce((acc, item) => {
+            acc[item.id] = item.quantity; 
+            return acc;
+        }, {});
+        setItemMap(map);
+    }, [items]);
 
     const handleQuantityChange = (id, event) => {
         const quantity = parseInt(event.target.value, 10);
@@ -41,7 +53,7 @@ const CartPage = () => {
                                     value={item.quantity}
                                     onChange={(e) => handleQuantityChange(item.id, e)}
                                 >
-                                    {Array.from({ length: item.quantity }, (_, i) => i + 1).map((num) => (
+                                    {Array.from({ length: itemMap[item.id] || 0 }, (_, i) => i + 1).map((num) => (
                                         <option key={num} value={num}>{num}</option>
                                     ))}
                                 </select>
