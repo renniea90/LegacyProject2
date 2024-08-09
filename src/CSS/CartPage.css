@@ -3,64 +3,34 @@
     margin: 0 auto;
     padding: 20px;
     box-sizing: border-box;
-    padding-top: 120px; 
-  }
-  
-  .cart-page h1 {
+    padding-top: 120px;
+}
+
+.cart-page h1 {
     font-size: 2rem;
     margin-bottom: 20px;
     color: goldenrod;
-  }
-  
-  table {
+}
+
+table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-  }
-  
-  
-  th, td {
+}
+
+th, td {
     border: 1px solid #ddd;
     padding: 12px;
     text-align: center;
-  }
-  
-  th {
+}
+
+th {
     background-color: goldenrod;
     color: white;
-  }
-  
-  tfoot td {
+}
+
+tfoot td {
     font-weight: bold;
-  }
-
-  .button-row {
-    display: table-cell;
-    text-align: center;
-    padding: 20px 0; 
-    background-color: #f4f4f4; 
-    border-top: 1px solid #ddd;
-    vertical-align: middle;
-}
-
-.button-row > div {
-    display: flex;
-    justify-content: center; 
-    gap: 20px; }
-
-.save-cart-btn, .checkout-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: goldenrod;
-    color: white;
-    font-size: 16px;   
-    display: inline-block;
-}
-
-.save-cart-btn:hover, .checkout-btn:hover {
-    background-color: #cc9900;
 }
 
 .retrieve-cart {
@@ -87,69 +57,23 @@
 .retrieve-cart button:hover {
     background-color: #cc9900;
 }
-  
-  button {
-    padding: 10px 20px;
-    background-color: goldenrod;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  button:hover {
-    background-color: #cc9900;
-  }
-  
-  button:disabled {
-    background-color: #ddd;
-    cursor: not-allowed;
-  }
-  
-  select {
-    width: 100px;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    text-align: center;
-    box-sizing: border-box;
-  }
-  
-  tfoot tr {
-    background-color: #f4f4f4;
-  }
-  
-  tfoot tr td {
-    padding: 15px;
-  }
-  
-  tfoot tr td:first-child {
-    font-weight: bold;
-  }
-  
-  tfoot tr td:last-child {
-    font-weight: normal;
-  }
-  
-  @media (max-width: 768px) {
+
+@media (max-width: 768px) {
     .cart-page {
-      padding: 10px;
+        padding: 10px;
     }
-  
+
     table {
-      font-size: 14px;
+        font-size: 14px;
     }
-  
+
     button {
-      padding: 8px 16px;
-      font-size: 14px;
+        padding: 8px 16px;
+        font-size: 14px;
     }
-  
+
     select {
-      width: 80px;
-      font-size: 14px;
+        width: 80px;
+        font-size: 14px;
     }
-  }
-  
+}
