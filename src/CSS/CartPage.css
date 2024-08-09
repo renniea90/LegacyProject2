@@ -1,0 +1,23 @@
+.cart-page {
+    padding: 20rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+th {
+    background-color: goldenrod;
+    color: white;
+}
+
+tfoot td {
+    font-weight: bold;
+}
