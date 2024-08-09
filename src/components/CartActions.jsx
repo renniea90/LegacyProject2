@@ -5,11 +5,15 @@ import RetrieveCart from './RetrieveCart';
 import '../CSS/CartActions.css';
 
 const CartActions = ({ onRetrieve }) => (
-    <div>
-        <SaveCartButton />
-        <CheckoutButton />
-        <RetrieveCart onRetrieve={onRetrieve} />
-    </div>
+    <>
+        <div className="button-container">
+            <SaveCartButton className="save-cart-btn" />
+            <CheckoutButton className="checkout-btn" />
+        </div>
+        <div className="retrieve-cart">
+            <RetrieveCart onRetrieve={onRetrieve} />
+        </div>
+    </>
 );
 
 export default CartActions;
