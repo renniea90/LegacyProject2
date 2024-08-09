@@ -63,6 +63,14 @@ th {
     color: white;
   }
 
+  table img {
+    width: 50px; 
+    height: auto; 
+    object-fit: cover; 
+    border-style: solid;
+    border-width: 1px;
+  }
+
 
 .update-btn, .delete-btn, .addproduct-btn {
     width: 100px;
