@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f8f8f8;
+  background-color: goldenrod;
   padding: 1rem;
   position: fixed;
   top: 0;
@@ -22,11 +22,11 @@
   background-color: goldenrod;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 80px;
   margin-bottom: 1rem;
-  padding-left: 0;
+  padding: 0 1rem; 
   box-sizing: border-box;
   position: relative; 
 }
@@ -40,19 +40,28 @@
 .menu-toggle {
   display: none;
   flex-direction: column;
+  align-items: center; 
   cursor: pointer;
-  position: absolute; 
-  right: 20px; 
   background-color: transparent; 
   padding: 0.5rem;
+  position: absolute; 
+  right: 20px; 
+  top: 50%;
+  transform: translateY(-50%); 
 }
 
 .menu-toggle .bar {
   width: 25px;
   height: 3px;
-  background-color: black; 
+  background-color: white; 
   margin: 3px 0;
   transition: 0.3s;
+}
+
+.menu-toggle span {
+  font-size: 0.9rem; 
+  color: white; 
+  margin-top: 5px; 
 }
 
 .nav {
@@ -86,8 +95,8 @@
     flex-direction: column;
     width: 15%;
     position: absolute;
-    right: 16px;
-    top: 80px; 
+    right: 0px;
+    top: 70px; 
     background-color: goldenrod;
     padding: 1rem;
     z-index: 1001;
