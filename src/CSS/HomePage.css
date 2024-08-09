@@ -1,58 +1,56 @@
-
 .home-body {
-    width: 80%;
-    margin-left: 10%;
-    margin-top: 220px;
-    height: 600px;
-    display: flex; 
-    align-items: flex-start; 
-    justify-content: space-between; 
-    position: relative;
-  }
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 220px;
+  height: 600px;
+  display: flex; 
+  align-items: center;
+  justify-content: space-between; 
+  position: relative;
+}
 
-  .feature-panel {
-    flex: 1;
+.feature-panel {
+  flex: 1;
   margin-right: 2rem;
   display: flex;
   flex-direction: column;
+  align-items: center; 
   justify-content: center; 
-  gap: 1rem; 
-  }
+  gap: 1rem;
+}
 
 .home-title {
-    color: goldenrod;
-    font-size: 4em;
-    text-align: left;
-    margin: 0;
+  color: goldenrod;
+  font-size: 4em;
+  text-align: left;
+  margin: 0;
 }
 
 .feature-text {
-    color: black;
+  color: black;
   font-size: 2em;
   text-align: left;
 }
 
 .banner-button {
-    width: 70%;
-    background-color: goldenrod;
-    color: black; 
-    font-size: 1.5em; 
-    border-radius: 10px;
-    border-color: transparent;
-    text-align: center; 
-    padding: 0.75em 0; 
-    margin-top: 1rem;
-    text-decoration: none;
+  width: 70%;
+  background-color: goldenrod;
+  color: rgb(255, 255, 255); 
+  font-size: 1.5em; 
+  border-radius: 10px;
+  border-color: transparent;
+  text-align: center; 
+  padding: 0.75em 0; 
+  margin-top: 1rem;
+  text-decoration: none;
 }
 
-
 .banner-button:hover {
-    background-color: darkgoldenrod;
+  background-color: darkgoldenrod;
 }
 
 .home-image {
-    float: right;
-    width: 40%;
-    max-width: 400px;
-    border-radius: 10px;
+  width: 40%;
+  max-width: 400px;
+  border-radius: 10px;
 }

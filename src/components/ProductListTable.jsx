@@ -30,7 +30,7 @@ const ProductListTable = ({ products, onUpdate, onDelete, onRequestSort, sortCon
                         <tr key={product.id}>
                             <td>{product.id}</td>
                             <td>{product.name}</td>
-                            <td>{product.price}</td>
+                            <td>£{product.price.toFixed(2)}</td>
                             <td>{product.quantity}</td>
                             <td>
                                 <button className="update-btn" onClick={() => onUpdate(product)}>Update</button>
