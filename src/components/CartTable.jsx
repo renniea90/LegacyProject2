@@ -30,7 +30,7 @@ const CartTable = ({ cartItems, itemMap, retrievedCart, handleQuantityChange, ha
             <tfoot>
                 <CartSummary total={total} serviceCharge={serviceCharge} />
                 <tr>
-                    <td colSpan="5" className="button-row">
+                    <td colSpan="5">
                         <CartActions onRetrieve={onRetrieve} />
                     </td>
                 </tr>
