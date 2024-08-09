@@ -42,6 +42,7 @@ const UpdateProduct = ({ product, onCancel, onUpdateSuccess }) => {
         isOpen={true}
         onRequestClose={onCancel}
         contentLabel="Update Product Modal"
+        shouldCloseOnOverlayClick={false}
         className="modal"
         overlayClassName="modal-overlay"
       >

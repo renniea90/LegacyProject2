@@ -81,6 +81,7 @@ const AddProduct = ({ onAddProduct }) => {
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
+        shouldCloseOnOverlayClick={false}
         contentLabel="Add Product Modal"
         className="modal"
         overlayClassName="modal-overlay"
