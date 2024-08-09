@@ -5,21 +5,33 @@ import '../CSS/Navbar.css';
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
+    const handleMouseEnter = () => {
+        setIsOpen(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsOpen(false);
     };
 
     return (
         <nav className="navbar">
             <div className="navbar-content">
                 <h1 className="site-title">Sahara Stationery</h1>
-                <div className="menu-toggle" onClick={toggleMenu}>
+                <div 
+                    className="menu-toggle"
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
                     <span className="bar"></span>
                     <span className="bar"></span>
                     <span className="bar"></span>
                     <span>Menu</span>
                 </div>
-                <ul className={`nav ${isOpen ? 'active' : ''}`}>
+                <ul 
+                    className={`nav ${isOpen ? 'active' : ''}`}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
                     <li className="nav-item">
                         <Link to="/">Home</Link>
                     </li>
