@@ -16,13 +16,14 @@
 
 .table-container {
   max-height: 700px;
-  overflow: auto;
+  overflow-y: auto;
 }
 
 
 table {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     width: 100%;
+    table-layout: auto;
 }
 
 th {
@@ -31,8 +32,7 @@ th {
   z-index: 2; 
   background-color: goldenrod; 
   color: white;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding: 10px;
   text-align: center;
   }
   
@@ -40,6 +40,7 @@ th {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
+    
   }
   
   table tr:nth-child(even) {
@@ -64,7 +65,7 @@ th {
 
 
 .update-btn, .delete-btn, .addproduct-btn {
-    width: 220px;
+    width: 100px;
     height: 50px;
     border: none;
      color: #fff;

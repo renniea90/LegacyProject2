@@ -17,10 +17,10 @@ const ProductListTable = ({ products, onUpdate, onDelete, onRequestSort, sortCon
             <table>
                 <thead>
                     <tr>
-                        <th onClick={() => onRequestSort('id')}>Product ID ↑ ↓</th>
-                        <th onClick={() => onRequestSort('name')}>Product Name ↑ ↓</th>
-                        <th onClick={() => onRequestSort('price')}>Price ↑ ↓</th>
-                        <th onClick={() => onRequestSort('quantity')}>Quantity ↑ ↓</th>
+                        <th onClick={() => onRequestSort('id')}>Product ID</th>
+                        <th onClick={() => onRequestSort('name')}>Product Name</th>
+                        <th onClick={() => onRequestSort('price')}>Price</th>
+                        <th onClick={() => onRequestSort('quantity')}>Quantity</th>
                         <th>Update Product</th>
                         <th>Delete Product</th>
                     </tr>
