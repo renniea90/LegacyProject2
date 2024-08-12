@@ -43,7 +43,7 @@ const UpdateProduct = ({ product, onCancel, onUpdateSuccess }) => {
     
 
     try {
-      const response = await axios.patch(`http://localhost:8081/item/update/${formData.id}`, formData);
+      const response = await axios.patch(`http://localhost:8082/item/update/${formData.id}`, formData);
       if (response.status === 200) {
         setAlertMessage('Product successfully updated.');
         setShowAlert(true);
