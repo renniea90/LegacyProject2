@@ -2,10 +2,11 @@ package com.legacy.demo.dtos;
 
 
 import com.legacy.demo.entities.Item;
+import jakarta.persistence.OneToMany;
 
 
 public class ItemDto {
-
+    @OneToMany
     private Integer id;
     private String name;
     private Double price;

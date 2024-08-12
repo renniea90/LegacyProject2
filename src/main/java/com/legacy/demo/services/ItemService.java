@@ -28,7 +28,6 @@ public class ItemService {
         for (Item Item : found) {
             dtos.add(new ItemDto(Item));
         }
-
         return dtos;
     }
 
@@ -58,7 +57,7 @@ public class ItemService {
 
     public ResponseEntity<?> ItemUpdate(Integer id,
                                             String name,
-                                            double price,
+                                            Double price,
                                             Integer quantity,
                                         String imageUrl){
 
@@ -71,13 +70,11 @@ public class ItemService {
 
 
         if (name != null) toUpdate.setName(name);
-        if (price != 0) toUpdate.setPrice(price);
+        if (price != null) toUpdate.setPrice(price);
         if (quantity != null) toUpdate.setQuantity(quantity);
         if (imageUrl != null) toUpdate.setImageUrl(imageUrl);
 
         Item updated = this.repo.save(toUpdate);
         return ResponseEntity.ok(new ItemDto(updated));
-
-
     }
 }
