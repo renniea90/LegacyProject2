@@ -9,7 +9,7 @@ const RetrieveCart = ({ onRetrieve }) => {
 
     const handleRetrieve = async () => {
         try {
-            const response = await axios.get(`http://localhost:8081/cart/${cartId}`);
+            const response = await axios.get(`http://localhost:8082/cart/${cartId}`);
             if (response.status === 200) {
                 onRetrieve(response.data.cartItems);
                 setAlertMessage('Cart successfully retrieved.');

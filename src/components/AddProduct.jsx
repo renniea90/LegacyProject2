@@ -51,7 +51,7 @@ if (productExists) {
 
 
     try {
-      const postResponse = await axios.post('http://localhost:8081/item/add', {
+      const postResponse = await axios.post('http://localhost:8082/item/add', {
         ...formData,
         price: parseFloat(formData.price).toFixed(2),
         quantity: parseInt(formData.quantity, 10)

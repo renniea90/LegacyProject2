@@ -8,7 +8,7 @@ const SaveCartButton = ({ cartItems }) => {
 
     const handleSaveCart = async () => {
         try {
-            const response = await axios.post('http://localhost:8081/cart/save', { cartItems });
+            const response = await axios.post('http://localhost:8082/cart/save', { cartItems });
             if (response.status === 200) {
                 setAlertMessage('Cart successfully saved.');
             } else {

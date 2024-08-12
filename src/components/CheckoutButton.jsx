@@ -8,7 +8,7 @@ const CheckoutButton = ({ cartItems }) => {
 
     const handleCheckout = async () => {
         try {
-            const response = await axios.post('http://localhost:8081/checkout', { cartItems });
+            const response = await axios.post('http://localhost:8082/checkout', { cartItems });
             if (response.status === 200) {
                 setAlertMessage('Checkout successful.');
             } else {

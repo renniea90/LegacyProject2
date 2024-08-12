@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8081/items/getAll';
+const API_URL = 'http://localhost:8082/items/getAll';
 
 const useFetchItems = () => {
     const [items, setItems] = useState([]);

@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import CustomAlert from './CustomAlert'; 
 import '../CSS/Modal.css'; 
 
-const API_URL = 'http://localhost:8081/item/remove/';
+const API_URL = 'http://localhost:8082/item/remove/';
 
 const DeleteProduct = ({ productIdToDelete, onCancel, onConfirm }) => {
     const [showConfirmation, setShowConfirmation] = useState(false);
