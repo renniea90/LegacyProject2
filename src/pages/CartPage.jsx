@@ -32,7 +32,7 @@ const CartPage = () => {
     };
 
     const calculateServiceCharge = (total) => {
-        return (total * 0.075).toFixed(2);
+        return (total * 0.0725).toFixed(2);
     };
 
     const total = parseFloat(calculateTotal());

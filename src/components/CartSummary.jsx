@@ -8,7 +8,7 @@ const CartSummary = ({ total, serviceCharge }) => (
             <td></td>
         </tr>
         <tr>
-            <td colSpan="3">Service Charge (7.5%)</td>
+            <td colSpan="3">Service Charge (7.25%)</td>
             <td>£{serviceCharge}</td>
             <td></td>
         </tr>
