@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import CustomAlert from './CustomAlert';
+import { useCart } from './CartContext'; 
 
-const CheckoutButton = ({ cartItems }) => {
+const CheckoutButton = () => {
+    const { cartItems } = useCart();
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
 
+
+    const cartId = cartItems.length > 0 ? cartItems[0].cartId : null; 
+
     const handleCheckout = async () => {
+        if (!cartId) {
+            setAlertMessage('No cart ID available.');
+            setShowAlert(true);
+            return;
+        }
+
         try {
-            const response = await axios.post('http://localhost:8082/checkout', { cartItems });
+            const response = await axios.patch(`http://localhost:8083/cart/checkout/${cartId}`);
             if (response.status === 200) {
                 setAlertMessage('Checkout successful.');
             } else {
