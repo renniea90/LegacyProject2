@@ -9,9 +9,10 @@ const RetrieveCart = ({ onRetrieve }) => {
 
     const handleRetrieve = async () => {
         try {
-            const response = await axios.get(`http://localhost:8082/cart/${cartId}`);
+            const response = await axios.get(`http://localhost:8083/cart/${cartId}`);
             if (response.status === 200) {
-                onRetrieve(response.data.cartItems);
+                console.log('Cart retrieved:', response.data); 
+                onRetrieve(response.data); 
                 setAlertMessage('Cart successfully retrieved.');
             } else {
                 setAlertMessage('Failed to retrieve cart.');
