@@ -10,11 +10,18 @@ const SaveCartButton = () => {
 
     const handleSaveCart = async () => {
         try {
+            
             const response = await axios.post('http://localhost:8083/cart/add', cartItems, {
                 headers: { 'Content-Type': 'application/json' }
             });
+
+            
             if (response.status === 201) {
-                setAlertMessage('Cart successfully saved.');
+              
+                const orderId = response.data;  
+                
+                
+                setAlertMessage(`Cart successfully saved. Your order ID is ${orderId}.`);
             } else {
                 setAlertMessage('Failed to save cart.');
             }
