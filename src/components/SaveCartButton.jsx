@@ -4,7 +4,7 @@ import CustomAlert from './CustomAlert';
 import { useCart } from './CartContext';
 
 function SaveCartButton() {
-    const { cartItems, newCart, setNewCart } = useCart();
+    const { cartItems, newCart, setNewCart, clearCart } = useCart();
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
 
@@ -28,7 +28,7 @@ function SaveCartButton() {
             setAlertMessage('Failed to save cart.');
         }
         setShowAlert(true);
-        
+        clearCart();
     };
 
     const closeAlert = () => {
