@@ -5,10 +5,9 @@ import useFetchItems from '../components/FetchItems';
 import CartTable from '../components/CartTable';
 
 const CartPage = () => {
-    const { cartItems, updateQuantity, removeFromCart } = useCart();
+    const { cartItems, updateQuantity, removeFromCart, setCartItems } = useCart(); // Access setCartItems from context
     const { items } = useFetchItems();
     const [itemMap, setItemMap] = useState({});
-    const [retrievedCart, setRetrievedCart] = useState([]);
 
     useEffect(() => {
         const map = items.reduce((acc, item) => {
@@ -38,22 +37,21 @@ const CartPage = () => {
     const total = parseFloat(calculateTotal());
     const serviceCharge = calculateServiceCharge(total);
 
-    const handleRetrieveCart = (cartItems) => {
-        setRetrievedCart(cartItems);
-    };
+    // const handleRetrieveCart = (retrievedItems) => {
+    //     setCartItems(retrievedItems); // Update the cartItems in context with the retrieved cart items
+    // };
 
     return (
         <div className="cart-page">
             <h1>Your Cart</h1>
             <CartTable
-                cartItems={cartItems}
+                cartItems={cartItems} // Pass cartItems directly from context
                 itemMap={itemMap}
-                retrievedCart={retrievedCart}
                 handleQuantityChange={handleQuantityChange}
                 handleRemoveItem={handleRemoveItem}
                 total={total}
                 serviceCharge={serviceCharge}
-                onRetrieve={handleRetrieveCart}
+                // onRetrieve={handleRetrieveCart} 
             />
         </div>
     );

@@ -3,25 +3,23 @@ import axios from 'axios';
 import CustomAlert from './CustomAlert';
 import { useCart } from './CartContext';
 
-const SaveCartButton = () => {
-    const { cartItems } = useCart();
+function SaveCartButton() {
+    const { cartItems, newCart, setNewCart } = useCart();
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
 
     const handleSaveCart = async () => {
         try {
-            
             const response = await axios.post('http://localhost:8083/cart/add', cartItems, {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            
             if (response.status === 201) {
-              
                 const orderId = response.data;  
-                
-                
+                console.log(orderId)
                 setAlertMessage(`Cart successfully saved. Your order ID is ${orderId}.`);
+                
+                setNewCart(orderId);
             } else {
                 setAlertMessage('Failed to save cart.');
             }
@@ -30,6 +28,7 @@ const SaveCartButton = () => {
             setAlertMessage('Failed to save cart.');
         }
         setShowAlert(true);
+        
     };
 
     const closeAlert = () => {
