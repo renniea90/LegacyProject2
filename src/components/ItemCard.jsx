@@ -46,7 +46,6 @@ const ItemCard = ({ id, name, price, imageUrl, quantity }) => {
             <h3>£{price?.toFixed(2)}</h3>
             <img className="card-image" src={imageUrl} alt={name} height={"50px"} />
             <br />
-            <p className="stock-info">Amount Available: {quantity}</p>
             {quantity > 0 ? (
                 <div className="quantityContainer">
                     <label htmlFor={`quantity-${id}`} className="quantityLabel">Qty:</label>

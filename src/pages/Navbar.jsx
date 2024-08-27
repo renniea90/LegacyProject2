@@ -16,7 +16,9 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             <div className="navbar-content">
+            <a href="/home">
                 <h1 className="site-title">Sahara Stationery</h1>
+            </a>
                 <div 
                     className="menu-toggle"
                     onMouseEnter={handleMouseEnter}
@@ -30,14 +32,8 @@ const Navbar = () => {
                 <ul 
                     className={`nav ${isOpen ? 'active' : ''}`}
                     onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                >
-                    <li className="nav-item">
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/shop">Shop</Link>
-                    </li>
+                    onMouseLeave={handleMouseLeave}                >
+                    
                     <li className="nav-item">
                         <Link to="/cart">Cart</Link>
                     </li>
