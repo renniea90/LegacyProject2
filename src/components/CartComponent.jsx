@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useCart } from './CartContext'; // Import the correct useCart from CartContext.jsx
 import axios from 'axios'; // Ensure axios is imported
 import CustomAlert from './CustomAlert'; // Ensure CustomAlert is imported
+import '../CSS/CartComponent.css';
+
 
 const CartItemRow = ({ item, itemMap, handleQuantityChange, handleRemoveItem }) => (
   <tr>
