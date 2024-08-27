@@ -16,7 +16,7 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             <div className="navbar-content">
-            <a href="/home">
+            <a href="/shop">
                 <h1 className="site-title">Sahara Stationery</h1>
             </a>
                 <div 
